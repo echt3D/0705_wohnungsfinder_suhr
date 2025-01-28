@@ -50,14 +50,14 @@ const Wohnungsfinder = () => {
       preloadImage(`/images/${i}.jpg`);
     }
   }, []);
-  const currentImage = preloadedVisus[`/images/1008.jpg`];
+  const currentImage = preloadedVisus[`/images/1009.jpg`];
   const stageRef = useRef(null);
   const bounds = { width: 2636, height: 1974 };
   const heightScale = containerSize.height / bounds.height;
   const widthScale = containerSize.width / bounds.width;
   const scaleRatio = Math.max(heightScale, widthScale);
 
-  const svgPathsArr = Object.entries(svgData["1008"]);
+  const svgPathsArr = Object.entries(svgData["1009"]);
   const strToNum = (points: string[]) => points.map((point) => Number(point));
 
   if (containerSize.width === 0 || containerSize.height === 0) {
