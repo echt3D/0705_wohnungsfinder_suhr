@@ -2,14 +2,17 @@
 import Image from "next/image";
 import { useContext } from "react";
 import { AptContext } from "../utils/createContext";
-const Navigations = () => {
+const Navigation = () => {
   const { visu, setVisu } = useContext(AptContext);
 
-  const switchRight = () => (visu < 1012 ? setVisu(visu + 1) : setVisu(1001));
+  const switchRight = () => {
+    return visu < 1012 ? setVisu(visu + 1) : setVisu(1001);
+  };
+
   const switchLeft = () => (visu > 1001 ? setVisu(visu - 1) : setVisu(1012));
 
   return (
-    <div className="xl:absolute xl:bottom-8 right-16 flex flex-row gap-2">
+    <div className="xl:absolute xl:bottom-8 right-16 flex flex-row gap-2 red">
       <button
         className="w-12 h-12 rounded-full bg-white flex place-items-center place-content-center "
         onClick={() => switchRight()}
@@ -36,4 +39,4 @@ const Navigations = () => {
   );
 };
 
-export default Navigations;
+export default Navigation;

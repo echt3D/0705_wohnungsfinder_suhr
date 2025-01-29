@@ -60,8 +60,6 @@ const Wohnungsfinder = () => {
   );
   const strToNum = (points: string[]) => points.map((point) => Number(point));
 
-  console.log("heeeyyy", visu);
-
   if (containerSize.width === 0 || containerSize.height === 0) {
     return <div ref={containerRef} className="w-full h-desktop" />;
   }
