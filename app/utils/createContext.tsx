@@ -11,7 +11,7 @@ export const AptContext = createContext<Apt>({
   // clickedApt: {},
   // setClickedApt: () => {},
   // isHovered: () => {},
-  visu: 1008,
+  visu: 1002,
   setVisu: () => {},
   // likedApts: [],
   // setLikedApts: () => {},

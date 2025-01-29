@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <header className="bg-white p-6 flex justify-between h-header_desktop">
+    <header className="bg-white px-12 flex justify-between items-center h-header_desktop red">
       <Image
         src="/logos/allreal_bama_logo_black_rgb_100.svg"
         height={100}

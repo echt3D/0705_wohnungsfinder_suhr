@@ -1,0 +1,41 @@
+{
+  "main": {
+    "loading": "laden..."
+  },
+  "sidebar": {
+    "frei": "frei",
+    "reserviert": "reserviert",
+    "vermietet": "vermietet",
+    "office": "Büro",
+    "year": "Jahr"
+  },
+  "filter": {
+    "sort_filter": "Sortieren & Filtern",
+    "sort": "Sortierung",
+    "space": "Fläche",
+    "floor": "Geschoss",
+    "other_filtering": "Wietere Filter",
+    "only_available_offices": "Nur verfügbare Gewerbe",
+    "only_liked": "Nur Gemerkte",
+    "reset_filter": "Filter entfernen",
+    "show_results": "Objekte anziegen"
+  },
+  "details": {
+    "back": "Zurück",
+    "frei": "frei",
+    "reserviert": "reserviert",
+    "vermietet": "vermietet",
+    "address": "Adresse",
+    "open_floorplan": "Grundriss öffnen",
+    "date": "Daten",
+    "move_in_date": "Bezugstermin",
+    "properties": "Eigenschaften",
+    "space": "Fläche",
+    "floor": "Geschoss",
+    "apply": "Bewerben"
+  },
+  "option": {
+    "option": "Option",
+    "show_availability": "Verfügbarkeiten dauerhaft anzeigen"
+  }
+}

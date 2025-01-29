@@ -9,9 +9,6 @@ import {
 import { AptContext } from "../utils/createContext";
 import { Stage, Layer, Group, Line, Image as KonvaImage } from "react-konva";
 import svgData from "../data/svgData.json";
-
-// import Image from "next/image";
-
 interface Visu {
   [key: string]: HTMLImageElement;
 }
