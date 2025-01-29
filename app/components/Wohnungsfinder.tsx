@@ -1,12 +1,12 @@
 "use client";
 import {
-  //   useContext,
+  useContext,
   useEffect,
   useRef,
   useState,
   useLayoutEffect,
 } from "react";
-
+import { AptContext } from "../utils/createContext";
 import { Stage, Layer, Group, Line, Image as KonvaImage } from "react-konva";
 import svgData from "../data/svgData.json";
 
@@ -27,6 +27,7 @@ const preloadImage = (src: string) => {
 };
 
 const Wohnungsfinder = () => {
+  const { visu } = useContext(AptContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   useLayoutEffect(() => {
@@ -50,21 +51,25 @@ const Wohnungsfinder = () => {
       preloadImage(`/images/${i}.jpg`);
     }
   }, []);
-  const currentImage = preloadedVisus[`/images/1001.jpg`];
+  const currentImage = preloadedVisus[`/images/${visu}.jpg`];
   const stageRef = useRef(null);
   const bounds = { width: 2636, height: 1974 };
   const heightScale = containerSize.height / bounds.height;
   const widthScale = containerSize.width / bounds.width;
   const scaleRatio = Math.max(heightScale, widthScale);
 
-  const svgPathsArr = Object.entries(svgData["1001"]);
+  const svgPathsArr = Object.entries(
+    svgData[visu?.toString() as keyof typeof svgData]
+  );
   const strToNum = (points: string[]) => points.map((point) => Number(point));
+
+  console.log("heeeyyy", visu);
 
   if (containerSize.width === 0 || containerSize.height === 0) {
     return <div ref={containerRef} className="w-full h-desktop" />;
   }
   return (
-    <div ref={containerRef} className="h-full w-desktop blue">
+    <div ref={containerRef} className="h-full w-full">
       <Stage
         ref={stageRef}
         width={containerSize.width}
