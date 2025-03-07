@@ -1,10 +1,11 @@
 "use client";
 import Image from "next/image";
-import { useContext } from "react";
-import { AptContext } from "../utils/createContext";
-const Navigation = () => {
-  const { visu, setVisu } = useContext(AptContext);
 
+type NavigationProps = {
+  visu: number;
+  setVisu: (visu: number) => void;
+};
+const Navigation = ({ visu, setVisu }: NavigationProps) => {
   const switchRight = () => {
     return visu < 1012 ? setVisu(visu + 1) : setVisu(1001);
   };

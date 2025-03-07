@@ -1,17 +1,19 @@
 "use client";
-import {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useLayoutEffect,
-} from "react";
-import { AptContext } from "../utils/createContext";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { Stage, Layer, Group, Line, Image as KonvaImage } from "react-konva";
 import svgData from "../data/svgData.json";
+import { Apartment } from "../utils/types";
+
 interface Visu {
   [key: string]: HTMLImageElement;
 }
+
+type WohnungsfinderProps = {
+  apartments: Apartment[] | null;
+  hoveredApartment: Apartment | null;
+  setHoveredApartment: (apartment: Apartment | null) => void;
+  visu: number;
+};
 
 const preloadedVisus: Visu = {};
 
@@ -23,8 +25,12 @@ const preloadImage = (src: string) => {
   }
 };
 
-const Wohnungsfinder = () => {
-  const { visu } = useContext(AptContext);
+const Wohnungsfinder = ({
+  apartments,
+  hoveredApartment,
+  setHoveredApartment,
+  visu,
+}: WohnungsfinderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   useLayoutEffect(() => {
@@ -60,6 +66,31 @@ const Wohnungsfinder = () => {
   );
   const strToNum = (points: string[]) => points.map((point) => Number(point));
 
+  const findApartmentByTitle = (apartmentTitle: string | null) =>
+    (apartments &&
+      apartments.find(
+        (apartment) => apartment.apartmentId === apartmentTitle
+      )) ||
+    null;
+
+  const handleHover = (apartmentTitle: string | null) => {
+    const foundApartment = findApartmentByTitle(apartmentTitle);
+    setHoveredApartment(foundApartment);
+  };
+
+  const isHovered = (apartmentTitle: string | null) =>
+    apartmentTitle === hoveredApartment?.apartmentId;
+
+  const getColorByStatus = (apartmentStatus: string | undefined) => {
+    switch (apartmentStatus) {
+      case "frei":
+        return "#7CB342";
+      case "reserviert":
+        return "#FFA000";
+      case "verkauft":
+        return "#535353";
+    }
+  };
   if (containerSize.width === 0 || containerSize.height === 0) {
     return <div ref={containerRef} className="w-full h-desktop" />;
   }
@@ -95,8 +126,8 @@ const Wohnungsfinder = () => {
           {svgPathsArr.map((point, i) => (
             <Group
               key={i}
-              // onMouseEnter={() => handleHover(point[0])}
-              // onMouseLeave={() => handleHover("")}
+              onMouseEnter={() => handleHover(point[0])}
+              onMouseLeave={() => handleHover(null)}
               // onClick={() => handleClick(point[0])}
             >
               {/* {showSVG ? ( */}
@@ -105,12 +136,8 @@ const Wohnungsfinder = () => {
                 strokeWidth={4}
                 stroke="white"
                 closed={true}
-                //   fill={getColorByStatus(
-                //     findApartmentByTitle(point[0]).stateSimplyfied
-                //   )}
-                //   opacity={
-                //     isHovered(point[0]) || isClicked(point[0]) ? 0.8 : 0.4
-                //   }
+                fill={getColorByStatus(findApartmentByTitle(point[0])?.state)}
+                opacity={isHovered(point[0]) ? 0.8 : 0.4}
               />
               {/* ) : (
                   <Line
