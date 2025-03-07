@@ -1,11 +1,11 @@
 import { createContext } from "react";
 
-interface Apt {
+interface ApartmentContext {
   visu: number;
   setVisu: (visu: number) => void;
 }
 
-export const AptContext = createContext<Apt>({
+export const AptContext = createContext<ApartmentContext>({
   // hoveredApt: {},
   // setHoveredApt: () => {},
   // clickedApt: {},

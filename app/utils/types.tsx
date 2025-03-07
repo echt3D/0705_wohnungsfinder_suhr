@@ -2,9 +2,7 @@ export interface Text {
   [key: string]: string | Text;
 }
 
-export interface TextProps {
-  t: Text;
-}
+
 
 export interface Apartment {
   apartmentId: string;

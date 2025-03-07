@@ -49,6 +49,10 @@ export default {
       fontFamily: {
         neue_kabel: ["neue-kabel", "sans-serif"],
       },
+      fontSize: {
+        sm: "12px",
+        md: "14px",
+      },
     },
   },
   plugins: [],
