@@ -62,17 +62,17 @@ export default function Home() {
     }
   }, [apartments]);
 
-  const filterByRange = (
-    apartments: Apartment[],
-    category: string,
-    min: number,
-    max: number
-  ) =>
-    apartments.filter(
-      (apartment) =>
-        (apartment[category as keyof Apartment] as number) >= min &&
-        (apartment[category as keyof Apartment] as number) <= max
-    );
+  // const filterByRange = (
+  //   apartments: Apartment[],
+  //   category: string,
+  //   min: number,
+  //   max: number
+  // ) =>
+  //   apartments.filter(
+  //     (apartment) =>
+  //       (apartment[category as keyof Apartment] as number) >= min &&
+  //       (apartment[category as keyof Apartment] as number) <= max
+  //   );
 
   // const filterByCheckbox = (apartments: Apartment[], category: string) => {
   //   if (checkbox?.[category as keyof Checkbox].length) {
@@ -89,28 +89,28 @@ export default function Home() {
   //   }
   // };
 
-  const sortApartments = (
-    apartments: Apartment[],
-    category: string,
-    direction: string
-  ) => {
-    const apartmentsCopy = [...apartments];
+  // const sortApartments = (
+  //   apartments: Apartment[],
+  //   category: string,
+  //   direction: string
+  // ) => {
+  //   const apartmentsCopy = [...apartments];
 
-    const filteredBySpace = filterByRange(
-      apartmentsCopy,
-      "area",
-      (space as number[])[0],
-      (space as number[])[1]
-    );
+  //   const filteredBySpace = filterByRange(
+  //     apartmentsCopy,
+  //     "area",
+  //     (space as number[])[0],
+  //     (space as number[])[1]
+  //   );
 
-    // const filteredByFloor = filterByCheckbox(filteredBySpace, "floor");
-    // const filteredByRooms = filterByCheckbox(filteredByFloor, "rooms");
-    // const filteredByStatus = filterByCheckbox(
-    //   filteredByRooms,
-    //   "stateSimplyfied"
-    // );
-    return filteredBySpace;
-  };
+  //   const filteredByFloor = filterByCheckbox(filteredBySpace, "floor");
+  //   const filteredByRooms = filterByCheckbox(filteredByFloor, "rooms");
+  //   const filteredByStatus = filterByCheckbox(
+  //     filteredByRooms,
+  //     "stateSimplyfied"
+  //   );
+  //   return filteredBySpace;
+  // };
 
   return (
     <>
