@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Head from "next/head";
 import "./globals.css";
+import { HeroUIProvider } from "@heroui/react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,7 +25,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/qmr1lwd.css" />
       </Head>
       <body className={`text-text_primary ${montserrat.className}`}>
-        {children}
+        <HeroUIProvider>{children}</HeroUIProvider>
       </body>
     </html>
   );
