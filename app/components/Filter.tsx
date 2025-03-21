@@ -7,7 +7,6 @@ type FilterProps = {
 };
 
 const Filter = ({ spaceMinMax, space, setSpace }: FilterProps) => {
-  console.log("value", space);
   return (
     <div className="w-full h-full bg-white red">
       <div className=" blue h-[90vh]">
