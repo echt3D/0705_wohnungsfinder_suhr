@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 import { heroui } from "@heroui/react";
 
-
 export default {
   safelist: [
     "text-frei",
@@ -48,6 +47,8 @@ export default {
       height: {
         desktop: "calc(100vh - 100px)",
         header_desktop: "100px",
+        filter_button_desktop: "56px",
+        filter_desktop: "calc(100vh - 100px - 72px)",
       },
       fontFamily: {
         neue_kabel: ["neue-kabel", "sans-serif"],

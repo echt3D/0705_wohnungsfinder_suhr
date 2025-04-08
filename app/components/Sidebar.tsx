@@ -1,27 +1,24 @@
 "use client";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import FilterButton from "./FilterButton";
-import { Text, Apartment } from "../utils/types";
+import { Text } from "../utils/types";
 import ApartmentCard from "./ApartmentCard";
 import Filter from "./Filter";
+import { ApartmentContext } from "../utils/createContext";
 
 type SidebarProps = {
   t: Text;
-  apartments: Apartment[] | null;
-  space: number[] | number;
-  spaceMinMax: number[];
-  setSpace: (space: number[] | number) => void;
+ 
 };
 
 const Sidebar = ({
   t,
-  apartments,
-  spaceMinMax,
-  space,
-  setSpace,
+
+ 
 }: SidebarProps) => {
   const [openFilter, setOpenFilter] = useState<boolean>(false);
-
+  const { apartments } = useContext(ApartmentContext);
+  console.log("apartments", apartments);
   return (
     <aside className="relative w-sidebar_desktop h-full flex flex-col  gap-8 blue px-6 py-2 bg-secondary">
       <FilterButton
@@ -30,7 +27,7 @@ const Sidebar = ({
         setOpenFilter={setOpenFilter}
       />
       {openFilter && (
-        <Filter spaceMinMax={spaceMinMax} space={space} setSpace={setSpace} />
+        <Filter />
       )}
 
       <div className="overflow-y-auto min-h-0">

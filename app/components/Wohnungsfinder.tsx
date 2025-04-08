@@ -1,19 +1,18 @@
 "use client";
-import { useEffect, useRef, useState, useLayoutEffect } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useLayoutEffect,
+  useContext,
+} from "react";
 import { Stage, Layer, Group, Line, Image as KonvaImage } from "react-konva";
 import svgData from "../data/svgData.json";
-import { Apartment } from "../utils/types";
+import { ApartmentContext } from "../utils/createContext";
 
 interface Visu {
   [key: string]: HTMLImageElement;
 }
-
-type WohnungsfinderProps = {
-  apartments: Apartment[] | null;
-  hoveredApartment: Apartment | null;
-  setHoveredApartment: (apartment: Apartment | null) => void;
-  visu: number;
-};
 
 const preloadedVisus: Visu = {};
 
@@ -25,12 +24,9 @@ const preloadImage = (src: string) => {
   }
 };
 
-const Wohnungsfinder = ({
-  apartments,
-  hoveredApartment,
-  setHoveredApartment,
-  visu,
-}: WohnungsfinderProps) => {
+const Wohnungsfinder = () => {
+  const { apartments, hoveredApartment, setHoveredApartment, visu } =
+    useContext(ApartmentContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   useLayoutEffect(() => {

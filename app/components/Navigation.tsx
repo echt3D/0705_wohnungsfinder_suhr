@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
+import { useContext } from "react";
+import { ApartmentContext } from "../utils/createContext";
 
-type NavigationProps = {
-  visu: number;
-  setVisu: (visu: number) => void;
-};
-const Navigation = ({ visu, setVisu }: NavigationProps) => {
+
+const Navigation = () => {
+  const { visu, setVisu } = useContext(ApartmentContext);
   const switchRight = () => {
     return visu < 1012 ? setVisu(visu + 1) : setVisu(1001);
   };
