@@ -2,8 +2,8 @@ import { createContext } from "react";
 import { Apartment } from "./types";
 
 interface ApartmentContext {
-  apartments: Apartment[] | null;
-  setApartments: (apartments: Apartment[] | null) => void;
+  apartments: Apartment[] | [];
+  setApartments: (apartments: Apartment[] | []) => void;
   hoveredApartment: Apartment | null;
   setHoveredApartment: (hoveredApartment: Apartment | null) => void;
   getMinMax: (category: string) => number[];
@@ -13,10 +13,17 @@ interface ApartmentContext {
   setSpace: (space: number[] | number) => void;
   rentalPrice: number[] | number;
   setRentalPrice: (rentalPrice: number[] | number) => void;
+  sortDirection: string;
+  setSortDirection: (sort: string) => void;
+  sortByMethod: (
+    apartments: Apartment[],
+    method: string,
+    direction: string
+  ) => void;
 }
 
 export const ApartmentContext = createContext<ApartmentContext>({
-  apartments: null,
+  apartments: [],
   setApartments: () => {},
   hoveredApartment: null,
   setHoveredApartment: () => {},
@@ -27,4 +34,7 @@ export const ApartmentContext = createContext<ApartmentContext>({
   setSpace: () => {},
   rentalPrice: 0,
   setRentalPrice: () => {},
+  sortDirection: "",
+  setSortDirection: () => {},
+  sortByMethod: () => {},
 });

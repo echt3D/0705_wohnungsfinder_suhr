@@ -12,10 +12,13 @@
   "filter": {
     "sort_filter": "Sortieren & Filtern",
     "sort": "Sortierung",
-    "space": "Fläche",
-    "floor": "Geschoss",
+    "sort_method": [
+      { "label": "Wohnfläche", "value": "area" },
+      { "label": "Geschoss", "value": "floor" },
+      { "label": "Zimmer", "value": "rooms" }
+    ],
     "other_filtering": "Wietere Filter",
-    "only_available_offices": "Nur verfügbare Gewerbe",
+    "only_available": "Nur verfügbare Gewerbe",
     "only_liked": "Nur Gemerkte",
     "reset_filter": "Filter entfernen",
     "show_results": "Objekte anziegen"

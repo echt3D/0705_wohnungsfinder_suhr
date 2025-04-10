@@ -5,17 +5,7 @@ import Wohnungsfinder from "./components/Wohnungsfinder";
 import Navigation from "./components/Navigation";
 import t from "./data/text.json";
 
-// type Checkbox = {
-//   floor: string[];
-//   rooms: string[];
-//   state: string[];
-// };
 
-// const initCheckbox: Checkbox = {
-//   floor: [],
-//   rooms: [],
-//   state: [],
-// };
 
 export default function Home() {
   // const [checkbox, setCheckbox] = useState<Checkbox>(initCheckbox);

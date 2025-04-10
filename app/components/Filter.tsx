@@ -1,23 +1,41 @@
 import { Slider } from "@heroui/slider";
-import { Checkbox } from "@heroui/checkbox";
-
+import { RadioGroup, Radio } from "@heroui/react";
 import { useContext } from "react";
 import { ApartmentContext } from "../utils/createContext";
+import t from "../data/text.json";
 
 const Filter = () => {
-  const { space, setSpace, getMinMax, rentalPrice, setRentalPrice } =
-    useContext(ApartmentContext);
+  const {
+    apartments,
+    space,
+    setSpace,
+    getMinMax,
+    rentalPrice,
+    setRentalPrice,
+    sortDirection,
+    sortByMethod,
+  } = useContext(ApartmentContext);
+  const { sort, sort_method } = t.filter;
 
   const spaceMinMax = getMinMax("area");
   const rentalPriceMinMax = getMinMax("rentalPrice");
   return (
     <div className="w-full h-full bg-white red">
       <div className=" blue h-[90vh]">
-        <div className="flex flex-col">
-          <Checkbox radius="full">Wohnfläche</Checkbox>
-          <Checkbox radius="full">Geschoss</Checkbox>
-          <Checkbox radius="full">Zimmer</Checkbox>
-        </div>
+        <RadioGroup label={sort}>
+          {sort_method.map((method, i) => (
+            <Radio
+              key={i}
+              value={method.value}
+              onChange={() =>
+                sortByMethod(apartments, method.value, sortDirection)
+              }
+            >
+              {method.label}
+            </Radio>
+          ))}
+        </RadioGroup>
+
         <Slider
           label="Fläche (m²)"
           value={space}

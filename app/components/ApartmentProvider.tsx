@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import { Apartment } from "../utils/types";
 
 const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
-  const [apartments, setApartments] = useState<Apartment[] | null>(null);
+  const [apartments, setApartments] = useState<Apartment[] | []>([]);
   const [hoveredApartment, setHoveredApartment] = useState<Apartment | null>(
     null
   );
   const [visu, setVisu] = useState<number>(1002);
   const [space, setSpace] = useState<number[] | number>([0, 0]);
   const [rentalPrice, setRentalPrice] = useState<number[] | number>([0, 0]);
+  const [sortDirection, setSortDirection] = useState<string>("descendent");
 
   useEffect(() => {
     fetch("/api/get-all-apartments")
@@ -45,6 +46,24 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     return [min, max];
   };
 
+  const sortByMethod = (
+    apartments: Apartment[] | [],
+    method: string,
+    direction: string
+  ) => {
+    const sortedApartments = apartments.sort(
+      (apartmentA: Apartment, apartmentB: Apartment) => {
+        const valueA = Number(apartmentA[method as keyof Apartment]) || 0;
+        const valueB = Number(apartmentB[method as keyof Apartment]) || 0;
+        if (direction === "descendent") return valueB - valueA;
+        if (direction === "ascendent") return valueA - valueB;
+        return 0;
+      }
+    );
+
+    setApartments(sortedApartments);
+  };
+
   const value = {
     apartments,
     setApartments,
@@ -57,6 +76,9 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     setSpace,
     rentalPrice,
     setRentalPrice,
+    sortDirection,
+    setSortDirection,
+    sortByMethod,
   };
 
   return (

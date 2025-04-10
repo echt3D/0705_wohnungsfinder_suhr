@@ -1,9 +1,3 @@
-export interface Text {
-  [key: string]: string | Text;
-}
-
-
-
 export interface Apartment {
   apartmentId: string;
   address: string;
@@ -31,4 +25,18 @@ export interface Apartment {
   deposit: number | null;
   reduitArea: number | null;
   referenceNumber: string;
+}
+
+export interface Sort {
+  method: string;
+  direction: string;
+}
+
+export interface SortMethod {
+  label: string;
+  value: string;
+}
+
+export interface Content {
+  [key: string]: string | Content | SortMethod[];
 }
