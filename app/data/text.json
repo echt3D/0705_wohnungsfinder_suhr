@@ -18,7 +18,7 @@
       { "label": "Zimmer", "value": "rooms" }
     ],
     "other_filtering": "Wietere Filter",
-    "only_available": "Nur verfügbare Gewerbe",
+    "only_available": "Nur verfügbare Wohnungen",
     "only_liked": "Nur Gemerkte",
     "reset_filter": "Filter entfernen",
     "show_results": "Objekte anziegen"

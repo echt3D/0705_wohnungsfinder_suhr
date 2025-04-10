@@ -27,6 +27,11 @@ export interface Apartment {
   referenceNumber: string;
 }
 
+export interface FilterType {
+  floor: string[] | [];
+  rooms: string[] | [];
+}
+
 export interface Sort {
   method: string;
   direction: string;

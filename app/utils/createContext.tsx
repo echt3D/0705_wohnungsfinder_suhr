@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Apartment } from "./types";
+import { Apartment, FilterType } from "./types";
 
 interface ApartmentContext {
   apartments: Apartment[] | [];
@@ -13,13 +13,8 @@ interface ApartmentContext {
   setSpace: (space: number[] | number) => void;
   rentalPrice: number[] | number;
   setRentalPrice: (rentalPrice: number[] | number) => void;
-  sortDirection: string;
-  setSortDirection: (sort: string) => void;
-  sortByMethod: (
-    apartments: Apartment[],
-    method: string,
-    direction: string
-  ) => void;
+  filter: FilterType;
+  setFilter: (filter: FilterType) => void;
 }
 
 export const ApartmentContext = createContext<ApartmentContext>({
@@ -34,7 +29,6 @@ export const ApartmentContext = createContext<ApartmentContext>({
   setSpace: () => {},
   rentalPrice: 0,
   setRentalPrice: () => {},
-  sortDirection: "",
-  setSortDirection: () => {},
-  sortByMethod: () => {},
+  filter: { floor: [], rooms: [] },
+  setFilter: () => {},
 });
