@@ -15,6 +15,7 @@ interface ApartmentContext {
   setRentalPrice: (rentalPrice: number[] | number) => void;
   filter: FilterType;
   setFilter: (filter: FilterType) => void;
+  filterTargetApartments: (apartments: Apartment[]) => Apartment[];
 }
 
 export const ApartmentContext = createContext<ApartmentContext>({
@@ -29,6 +30,7 @@ export const ApartmentContext = createContext<ApartmentContext>({
   setSpace: () => {},
   rentalPrice: 0,
   setRentalPrice: () => {},
-  filter: { floor: [], rooms: [] },
+  filter: { floor: [], rooms: [], state: [] },
   setFilter: () => {},
+  filterTargetApartments: () => [],
 });

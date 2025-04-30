@@ -6,6 +6,7 @@ import { Apartment, FilterType } from "../utils/types";
 const initFilter = {
   floor: [],
   rooms: [],
+  state: [],
 };
 
 const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
@@ -51,6 +52,68 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     return [min, max];
   };
 
+  const filterByCheckbox = (
+    apartments: Apartment[],
+    category: keyof FilterType
+  ) => {
+    const currentFilter = filter[category] as string[];
+
+    if (currentFilter.length) {
+      return apartments.filter((apartment) => {
+        const value = apartment[category as keyof Apartment] as string;
+        return currentFilter.includes(value);
+      });
+    } else {
+      return apartments;
+    }
+  };
+
+  const filterByRange = (
+    apartments: Apartment[],
+    category: keyof Apartment,
+    min: number,
+    max: number
+  ) => {
+    const filteredApartments = apartments.filter(
+      (apartment) =>
+        Number(apartment[category]) >= min && Number(apartment[category]) <= max
+    );
+    return filteredApartments;
+  };
+
+  const filterTargetApartments = (
+    apartments: Apartment[]
+    // category: keyof Apartment
+    // direction: string
+  ) => {
+    const apartmentsCopy = [...apartments];
+
+    const hi = space as number[];
+
+    const filteredBySpace = filterByRange(apartmentsCopy, "area", hi[0], hi[1]);
+
+    const filteredByFloor = filterByCheckbox(filteredBySpace, "floor");
+    const filteredByRooms = filterByCheckbox(filteredByFloor, "rooms");
+    const filteredByStatus = filterByCheckbox(filteredByRooms, "state");
+    // const filteredByLikes = filterByLikes(filteredByStatus);
+
+    // switch (direction) {
+    //   case "descendent":
+    //     filteredByLikes.sort(
+    //       (apartmentA, apartmentB) =>
+    //         Number(apartmentA[category]) - Number(apartmentB[category])
+    //     );
+    //     break;
+    //   case "ascendent":
+    //     filteredByLikes.sort(
+    //       (apartmentA, apartmentB) =>
+    //         Number(apartmentB[category]) - Number(apartmentA[category])
+    //     );
+    //     break;
+    // }
+    return filteredByStatus;
+  };
+
   const value = {
     apartments,
     setApartments,
@@ -65,6 +128,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     setRentalPrice,
     filter,
     setFilter,
+    filterTargetApartments,
   };
 
   return (

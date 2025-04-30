@@ -49,7 +49,6 @@ const Filter = () => {
         setFilter({ ...filter, [name]: filteredCheckBox });
       }
     }
-    console.log("filter", filter);
   };
 
   return (

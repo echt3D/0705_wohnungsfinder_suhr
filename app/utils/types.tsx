@@ -30,6 +30,7 @@ export interface Apartment {
 export interface FilterType {
   floor: string[] | [];
   rooms: string[] | [];
+  state: string[] | [];
 }
 
 export interface Sort {

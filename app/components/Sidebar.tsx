@@ -12,7 +12,7 @@ type SidebarProps = {
 
 const Sidebar = ({ t }: SidebarProps) => {
   const [openFilter, setOpenFilter] = useState<boolean>(false);
-  const { apartments } = useContext(ApartmentContext);
+  const { apartments, filterTargetApartments } = useContext(ApartmentContext);
   return (
     <aside className="relative w-sidebar_desktop h-full flex flex-col  gap-8 blue px-6 py-2 bg-secondary">
       <FilterButton
@@ -25,7 +25,7 @@ const Sidebar = ({ t }: SidebarProps) => {
       <div className="overflow-y-auto min-h-0">
         <ul className="flex flex-col gap-8">
           {apartments &&
-            apartments.map((apartment, i) => (
+            filterTargetApartments(apartments).map((apartment, i) => (
               <li
                 key={i}
                 className="px-2 py-4 shadow-md border rounded-lg bg-white"
