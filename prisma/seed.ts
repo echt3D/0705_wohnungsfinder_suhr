@@ -1,5 +1,6 @@
-import { dbClient } from "../app/utils/dbClient";
+import { PrismaClient } from "@prisma/client";
 import { rawApartments } from "./rawApartments";
+const dbClient = new PrismaClient();
 
 const seed = async () => {
   await createApartments();
