@@ -11,14 +11,14 @@
   },
   "filter": {
     "sort_filter": "Sortieren & Filtern",
-    "sort": "Sortierung",
+    "sort_label": "Sortierung",
     "sort_method": [
       { "label": "Wohnfläche", "value": "area" },
       { "label": "Geschoss", "value": "floor" },
       { "label": "Zimmer", "value": "rooms" }
     ],
-    "floors": "Geschoss",
-    "rooms": "Zimmer",
+    "floors_label": "Geschoss",
+    "rooms_label": "Zimmer",
     "other_filtering": "Wietere Filter",
     "only_available": "Nur verfügbare Wohnungen",
     "only_liked": "Nur Gemerkte",

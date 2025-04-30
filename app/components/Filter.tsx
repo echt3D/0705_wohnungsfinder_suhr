@@ -24,16 +24,20 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
     filterTargetApartments,
     activateLikedApartments,
     setActivateLikedApartments,
+    isDescendent,
+    setIsDescendent,
+    sort,
+    setSort,
   } = useContext(ApartmentContext);
   const {
-    sort,
+    sort_label,
     sort_method,
     only_available,
     only_liked,
     reset_filter,
     show_results,
-    floors,
-    rooms,
+    floors_label,
+    rooms_label,
     other_filtering,
   } = t.filter;
 
@@ -72,12 +76,16 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
     (filter[name as keyof FilterType] as string[]).includes(value);
 
   return (
-    <div className="w-full h-filter_desktop  absolute top-filter_desktop px-6 py-2 left-0">
+    <div className="w-full h-filter_desktop  absolute top-filter_desktop px-6 pt-2 left-0">
       <div className="flex flex-col gap-8 bg-white px-4 py-2 h-full">
         <div className="flex justify-between">
-          <RadioGroup label={sort}>
+          <RadioGroup label={sort_label} value={sort} onValueChange={setSort}>
             {sort_method.map((method, i) => (
-              <Radio key={i} value={method.value}>
+              <Radio
+                key={i}
+                value={method.value}
+                onChange={() => setSort(method.value)}
+              >
                 {method.label}
               </Radio>
             ))}
@@ -85,9 +93,13 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
           <div className="h-full">
             <Image
               src="/icons/arrow.svg"
-              height={24}
-              width={24}
+              height={20}
+              width={20}
               alt="sort arrow"
+              onClick={() => setIsDescendent(!isDescendent)}
+              className={`cursor-pointer ${
+                isDescendent ? "rotate-0" : "rotate-180"
+              }`}
             />
           </div>
         </div>
@@ -114,7 +126,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
           />
         </section>
         <section className="flex flex-col gap-2">
-          <p className="font-medium ">{floors}</p>
+          <p className="font-medium ">{floors_label}</p>
 
           <div className="grid grid-cols-2 gap-2">
             {createCheckboxes("floor").map((floorItem, i) => (
@@ -131,7 +143,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
           </div>
         </section>
         <section className="flex flex-col gap-2">
-          <p className="font-medium ">{rooms}</p>
+          <p className="font-medium ">{rooms_label}</p>
           <div className="grid grid-cols-2 gap-2">
             {createCheckboxes("rooms").map((roomsItem, i) => (
               <Checkbox
@@ -167,7 +179,8 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
           <button
             className="text-md font-semibold text-tertiary hover:opacity-80 duration-200"
             onClick={() => {
-              setActivateLikedApartments(!activateLikedApartments);
+              setSort(null);
+              setActivateLikedApartments(false);
               setFilter({
                 floor: [],
                 rooms: [],

@@ -28,7 +28,7 @@ const Sidebar = ({ t }: SidebarProps) => {
             filterTargetApartments(apartments).map((apartment, i) => (
               <li
                 key={i}
-                className="px-2 py-4 shadow-md border rounded-lg bg-white"
+                className="px-2 py-4 shadow-md border rounded-lg bg-white flex flex-col gap-2"
               >
                 <ApartmentCard apartment={apartment} />
               </li>

@@ -20,6 +20,10 @@ interface ApartmentContext {
   isLikedApartment: (apartment: string) => boolean;
   activateLikedApartments: boolean;
   setActivateLikedApartments: (activateLikedApartments: boolean) => void;
+  isDescendent: boolean;
+  setIsDescendent: (isDescendent: boolean) => void;
+  sort: string | null;
+  setSort: (sort: string | null) => void;
 }
 
 export const ApartmentContext = createContext<ApartmentContext>({
@@ -41,4 +45,8 @@ export const ApartmentContext = createContext<ApartmentContext>({
   isLikedApartment: () => false,
   activateLikedApartments: false,
   setActivateLikedApartments: () => {},
+  isDescendent: false,
+  setIsDescendent: () => {},
+  sort: null,
+  setSort: () => {},
 });

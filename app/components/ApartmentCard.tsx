@@ -5,7 +5,7 @@ import LikeButton from "./LikeButton";
 const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <StatusBatch status={apartment.state} />
         <LikeButton apartment={apartment.title} />
       </div>

@@ -22,6 +22,8 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [likedApartments, setLikedApartments] = useState<string[]>([]);
   const [activateLikedApartments, setActivateLikedApartments] =
     useState<boolean>(false);
+  const [isDescendent, setIsDescendent] = useState<boolean>(true);
+  const [sort, setSort] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/get-all-apartments")
@@ -118,14 +120,30 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     return filteredApartments;
   };
 
-  const filterTargetApartments = (
-    apartments: Apartment[]
-    // category: keyof Apartment
-    // direction: string
-  ) => {
+  const sortApartmentsByCategory = (apartments: Apartment[]) => {
+    if (!sort) return apartments;
+    if (isDescendent) {
+      const sortedApartments = apartments.sort(
+        (apartmentA, apartmentB) =>
+          Number(apartmentA[sort as keyof Apartment]) -
+          Number(apartmentB[sort as keyof Apartment])
+      );
+      return sortedApartments;
+    } else {
+      const sortedApartments = apartments.sort(
+        (apartmentA, apartmentB) =>
+          Number(apartmentB[sort as keyof Apartment]) -
+          Number(apartmentA[sort as keyof Apartment])
+      );
+      return sortedApartments;
+    }
+  };
+
+  const filterTargetApartments = (apartments: Apartment[]) => {
     const apartmentsCopy = [...apartments];
     const spaceMinMax = space as number[];
     const rentalPriceMinMax = rentalPrice as number[];
+    let targetApartments: Apartment[];
 
     const filteredBySpace = filterByRange(
       apartmentsCopy,
@@ -145,26 +163,12 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     const filteredByRooms = filterByCheckbox(filteredByFloor, "rooms");
     const filteredByStatus = filterByCheckbox(filteredByRooms, "state");
     if (activateLikedApartments) {
-      const filteredByLikes = filterByLikes(filteredByStatus);
-      return filteredByLikes;
+      targetApartments = filterByLikes(filteredByStatus);
     } else {
-      return filteredByStatus;
+      targetApartments = filteredByStatus;
     }
 
-    // switch (direction) {
-    //   case "descendent":
-    //     filteredByLikes.sort(
-    //       (apartmentA, apartmentB) =>
-    //         Number(apartmentA[category]) - Number(apartmentB[category])
-    //     );
-    //     break;
-    //   case "ascendent":
-    //     filteredByLikes.sort(
-    //       (apartmentA, apartmentB) =>
-    //         Number(apartmentB[category]) - Number(apartmentA[category])
-    //     );
-    //     break;
-    // }
+    return sortApartmentsByCategory(targetApartments);
   };
 
   const value = {
@@ -186,6 +190,10 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     isLikedApartment,
     activateLikedApartments,
     setActivateLikedApartments,
+    isDescendent,
+    setIsDescendent,
+    sort,
+    setSort,
   };
 
   return (
