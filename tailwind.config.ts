@@ -48,7 +48,7 @@ export default {
         desktop: "calc(100vh - 100px)",
         header_desktop: "100px",
         filter_button_desktop: "56px",
-        filter_desktop: "calc(100vh - 100px - 71px)",
+        filter_desktop: "calc(100vh - 100px - 64px)",
       },
       fontFamily: {
         neue_kabel: ["neue-kabel", "sans-serif"],
@@ -58,7 +58,7 @@ export default {
         md: "14px",
       },
       inset: {
-        filter_desktop: "70px",
+        filter_desktop: "62px",
       },
     },
   },

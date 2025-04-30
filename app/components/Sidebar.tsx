@@ -22,7 +22,7 @@ const Sidebar = ({ t }: SidebarProps) => {
       />
       {openFilter && <Filter setOpenFilter={setOpenFilter} />}
 
-      <div className="overflow-scroll h-filter_desktop">
+      <div className="overflow-scroll h-filter_desktop ">
         <ul className="flex flex-col gap-8 py-2">
           {apartments &&
             filterTargetApartments(apartments).map((apartment, i) => (

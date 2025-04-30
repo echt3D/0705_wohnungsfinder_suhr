@@ -8,7 +8,7 @@ const FilterButton = ({ t, openFilter, setOpenFilter }: FilterButtonProps) => {
   return (
     <section
       onClick={() => setOpenFilter(!openFilter)}
-      className={`w-full shadow-xl border bg-secondary rounded-lg flex justify-between items-center cursor-pointer p-4 text-text_primary h-filter_button_desktop red
+      className={`w-full shadow-xl border bg-secondary rounded-lg flex justify-between items-center cursor-pointer p-4 text-text_primary h-filter_button_desktop
       }`}
     >
       <div className="flex gap-2 items-center">
