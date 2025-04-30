@@ -7,7 +7,11 @@ import { Apartment, FilterType } from "../utils/types";
 import Image from "next/image";
 import t from "../data/text.json";
 
-const Filter = () => {
+type FilterProps = {
+  setOpenFilter: (filter: boolean) => void;
+};
+
+const Filter = ({ setOpenFilter }: FilterProps) => {
   const {
     apartments,
     space,
@@ -17,8 +21,10 @@ const Filter = () => {
     setRentalPrice,
     filter,
     setFilter,
+    filterTargetApartments,
   } = useContext(ApartmentContext);
-  const { sort, sort_method, only_available, only_liked } = t.filter;
+  const { sort, sort_method, only_available, only_liked, show_results } =
+    t.filter;
 
   const spaceMinMax = getMinMax("area");
   const rentalPriceMinMax = getMinMax("rentalPrice");
@@ -49,11 +55,12 @@ const Filter = () => {
         setFilter({ ...filter, [name]: filteredCheckBox });
       }
     }
+    console.log("filter", filter);
   };
 
   return (
     <div className="w-full h-full bg-white red">
-      <div className=" blue h-[90vh]">
+      <div className=" blue  flex flex-col">
         <div className="flex  justify-between">
           <RadioGroup label={sort}>
             {sort_method.map((method, i) => (
@@ -109,13 +116,19 @@ const Filter = () => {
             <Checkbox
               name={"rooms"}
               key={i}
+              value={roomsItem}
               onChange={handleCheckboxes}
             >{`${roomsItem} Zimmer`}</Checkbox>
           ))}
         </div>
 
-        <Checkbox>{only_available}</Checkbox>
+        <Checkbox name={"state"} value={"frei"} onChange={handleCheckboxes}>
+          {only_available}
+        </Checkbox>
         <Checkbox>{only_liked}</Checkbox>
+        <button onClick={() => setOpenFilter(false)}>{`${show_results} (${
+          filterTargetApartments(apartments).length
+        })`}</button>
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ const Sidebar = ({ t }: SidebarProps) => {
         openFilter={openFilter}
         setOpenFilter={setOpenFilter}
       />
-      {openFilter && <Filter />}
+      {openFilter && <Filter setOpenFilter={setOpenFilter} />}
 
       <div className="overflow-y-auto min-h-0">
         <ul className="flex flex-col gap-8">

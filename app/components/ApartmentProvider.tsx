@@ -38,15 +38,16 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     if (!apartments || apartments.length === 0) {
       return [0, 0];
     }
-    [...(apartments || [])].sort(
+    const sortedApartments = [...(apartments || [])].sort(
       (apartment1: Apartment, apartment2: Apartment) => {
         const valueA = Number(apartment1[category as keyof Apartment]) || 0;
         const valueB = Number(apartment2[category as keyof Apartment]) || 0;
         return valueA - valueB;
       }
     );
-    const min = apartments?.[0][category as keyof Apartment] as number;
-    const max = apartments?.[apartments.length - 1][
+
+    const min = sortedApartments?.[0][category as keyof Apartment] as number;
+    const max = sortedApartments?.[sortedApartments.length - 1][
       category as keyof Apartment
     ] as number;
     return [min, max];
@@ -57,10 +58,9 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     category: keyof FilterType
   ) => {
     const currentFilter = filter[category] as string[];
-
     if (currentFilter.length) {
       return apartments.filter((apartment) => {
-        const value = apartment[category as keyof Apartment] as string;
+        const value = String(apartment[category as keyof Apartment]);
         return currentFilter.includes(value);
       });
     } else {
@@ -74,10 +74,11 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     min: number,
     max: number
   ) => {
-    const filteredApartments = apartments.filter(
-      (apartment) =>
+    const filteredApartments = apartments.filter((apartment) => {
+      return (
         Number(apartment[category]) >= min && Number(apartment[category]) <= max
-    );
+      );
+    });
     return filteredApartments;
   };
 
@@ -87,13 +88,27 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     // direction: string
   ) => {
     const apartmentsCopy = [...apartments];
+    const spaceMinMax = space as number[];
+    const rentalPriceMinMax = rentalPrice as number[];
 
-    const hi = space as number[];
+    const filteredBySpace = filterByRange(
+      apartmentsCopy,
+      "area",
+      spaceMinMax[0],
+      spaceMinMax[1]
+    );
 
-    const filteredBySpace = filterByRange(apartmentsCopy, "area", hi[0], hi[1]);
+    const filteredByrentalPrice = filterByRange(
+      filteredBySpace,
+      "rentalPrice",
+      rentalPriceMinMax[0],
+      rentalPriceMinMax[1]
+    );
 
-    const filteredByFloor = filterByCheckbox(filteredBySpace, "floor");
+    const filteredByFloor = filterByCheckbox(filteredByrentalPrice, "floor");
+    // console.log("filteredByFloor", filteredByFloor);
     const filteredByRooms = filterByCheckbox(filteredByFloor, "rooms");
+    // console.log("filteredByRooms", filteredByRooms);
     const filteredByStatus = filterByCheckbox(filteredByRooms, "state");
     // const filteredByLikes = filterByLikes(filteredByStatus);
 
