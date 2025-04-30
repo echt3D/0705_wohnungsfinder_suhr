@@ -23,8 +23,14 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
     setFilter,
     filterTargetApartments,
   } = useContext(ApartmentContext);
-  const { sort, sort_method, only_available, only_liked, show_results } =
-    t.filter;
+  const {
+    sort,
+    sort_method,
+    only_available,
+    only_liked,
+    reset_filter,
+    show_results,
+  } = t.filter;
 
   const spaceMinMax = getMinMax("area");
   const rentalPriceMinMax = getMinMax("rentalPrice");
@@ -55,13 +61,15 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
         setFilter({ ...filter, [name]: filteredCheckBox });
       }
     }
-    console.log("filter", filter);
   };
+
+  const isChecked = (name: string, value: string) =>
+    (filter[name as keyof FilterType] as string[]).includes(value);
 
   return (
     <div className="w-full h-full bg-white red">
-      <div className=" blue  flex flex-col">
-        <div className="flex  justify-between">
+      <div className=" blue flex flex-col">
+        <div className="flex justify-between">
           <RadioGroup label={sort}>
             {sort_method.map((method, i) => (
               <Radio key={i} value={method.value}>
@@ -106,6 +114,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
               name={"floor"}
               value={floorItem}
               onChange={handleCheckboxes}
+              isSelected={isChecked("floor", floorItem)}
             >
               {floorItem}
             </Checkbox>
@@ -118,14 +127,31 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
               key={i}
               value={roomsItem}
               onChange={handleCheckboxes}
+              isSelected={isChecked("rooms", `${roomsItem}`)}
             >{`${roomsItem} Zimmer`}</Checkbox>
           ))}
         </div>
 
-        <Checkbox name={"state"} value={"frei"} onChange={handleCheckboxes}>
+        <Checkbox
+          name={"state"}
+          value={"frei"}
+          onChange={handleCheckboxes}
+          isSelected={isChecked("state", "frei")}
+        >
           {only_available}
         </Checkbox>
         <Checkbox>{only_liked}</Checkbox>
+        <button
+          onClick={() =>
+            setFilter({
+              floor: [],
+              rooms: [],
+              state: [],
+            })
+          }
+        >
+          {reset_filter}
+        </button>
         <button onClick={() => setOpenFilter(false)}>{`${show_results} (${
           filterTargetApartments(apartments).length
         })`}</button>

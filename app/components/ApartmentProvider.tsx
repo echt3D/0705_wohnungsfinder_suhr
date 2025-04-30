@@ -1,6 +1,6 @@
 "use client";
 import { ApartmentContext } from "../utils/createContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Apartment, FilterType } from "../utils/types";
 
 const initFilter = {
@@ -18,6 +18,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [space, setSpace] = useState<number[] | number>([0, 0]);
   const [rentalPrice, setRentalPrice] = useState<number[] | number>([0, 0]);
   const [filter, setFilter] = useState<FilterType>(initFilter);
+  const [likedApartments, setLikedApartments] = useState<string[]>([]);
 
   useEffect(() => {
     fetch("/api/get-all-apartments")
@@ -52,6 +53,30 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     ] as number;
     return [min, max];
   };
+
+  const handleLikedApartments = useCallback(
+    (apartment: string) => {
+      if (likedApartments.includes(apartment)) {
+        const updated = likedApartments.filter((id) => id !== apartment);
+        setLikedApartments(updated);
+        localStorage.setItem("likedApartments", JSON.stringify(updated));
+      } else {
+        const updated = [...likedApartments, apartment];
+        setLikedApartments(updated);
+        localStorage.setItem("likedApartments", JSON.stringify(updated));
+      }
+    },
+    [likedApartments]
+  );
+
+  const isLikedApartment = (apartment: string) =>
+    likedApartments.includes(apartment);
+
+  useEffect(() => {
+    const storedLikedApartments = localStorage.getItem("likedApartments");
+    if (storedLikedApartments)
+      setLikedApartments(JSON.parse(storedLikedApartments));
+  }, []);
 
   const filterByCheckbox = (
     apartments: Apartment[],
@@ -106,9 +131,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     );
 
     const filteredByFloor = filterByCheckbox(filteredByrentalPrice, "floor");
-    // console.log("filteredByFloor", filteredByFloor);
     const filteredByRooms = filterByCheckbox(filteredByFloor, "rooms");
-    // console.log("filteredByRooms", filteredByRooms);
     const filteredByStatus = filterByCheckbox(filteredByRooms, "state");
     // const filteredByLikes = filterByLikes(filteredByStatus);
 
@@ -144,6 +167,8 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     filter,
     setFilter,
     filterTargetApartments,
+    handleLikedApartments,
+    isLikedApartment,
   };
 
   return (

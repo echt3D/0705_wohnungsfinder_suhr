@@ -16,6 +16,8 @@ interface ApartmentContext {
   filter: FilterType;
   setFilter: (filter: FilterType) => void;
   filterTargetApartments: (apartments: Apartment[]) => Apartment[];
+  handleLikedApartments: (apartment: string) => void;
+  isLikedApartment: (apartment: string) => boolean;
 }
 
 export const ApartmentContext = createContext<ApartmentContext>({
@@ -33,4 +35,6 @@ export const ApartmentContext = createContext<ApartmentContext>({
   filter: { floor: [], rooms: [], state: [] },
   setFilter: () => {},
   filterTargetApartments: () => [],
+  handleLikedApartments: () => {},
+  isLikedApartment: () => false,
 });

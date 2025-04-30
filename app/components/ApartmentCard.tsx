@@ -1,12 +1,13 @@
 import { Apartment } from "../utils/types";
 import StatusBatch from "./StatusBatch";
+import LikeButton from "./LikeButton";
 
 const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
   return (
     <>
       <div className="flex justify-between">
         <StatusBatch status={apartment.state} />
-        <div>&lt;3</div>
+        <LikeButton apartment={apartment.title} />
       </div>
       <div className="flex gap-2 text-sm">
         <span className="text-primary">{`Whg. ${apartment.name}`}</span>
