@@ -14,7 +14,7 @@ const Sidebar = ({ t }: SidebarProps) => {
   const [openFilter, setOpenFilter] = useState<boolean>(false);
   const { apartments, filterTargetApartments } = useContext(ApartmentContext);
   return (
-    <aside className="relative w-sidebar_desktop h-full flex flex-col  gap-8 blue px-6 py-2 bg-secondary">
+    <aside className="relative w-sidebar_desktop h-full gap-8 px-6 py-2 bg-secondary">
       <FilterButton
         t={(t.filter as Content).sort_filter as string}
         openFilter={openFilter}
@@ -22,8 +22,8 @@ const Sidebar = ({ t }: SidebarProps) => {
       />
       {openFilter && <Filter setOpenFilter={setOpenFilter} />}
 
-      <div className="overflow-y-auto min-h-0">
-        <ul className="flex flex-col gap-8">
+      <div className="overflow-scroll h-filter_desktop">
+        <ul className="flex flex-col gap-8 py-2">
           {apartments &&
             filterTargetApartments(apartments).map((apartment, i) => (
               <li

@@ -57,6 +57,9 @@ export default {
         sm: "12px",
         md: "14px",
       },
+      inset: {
+        filter_desktop: "72px",
+      },
     },
   },
   plugins: [heroui()],

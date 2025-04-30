@@ -17,6 +17,8 @@
       { "label": "Geschoss", "value": "floor" },
       { "label": "Zimmer", "value": "rooms" }
     ],
+    "floors": "Geschoss",
+    "rooms": "Zimmer",
     "other_filtering": "Wietere Filter",
     "only_available": "Nur verfügbare Wohnungen",
     "only_liked": "Nur Gemerkte",
