@@ -22,6 +22,8 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
     filter,
     setFilter,
     filterTargetApartments,
+    activateLikedApartments,
+    setActivateLikedApartments,
   } = useContext(ApartmentContext);
   const {
     sort,
@@ -140,7 +142,12 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
         >
           {only_available}
         </Checkbox>
-        <Checkbox>{only_liked}</Checkbox>
+        <Checkbox
+          isSelected={activateLikedApartments}
+          onChange={() => setActivateLikedApartments(!activateLikedApartments)}
+        >
+          {only_liked}
+        </Checkbox>
         <button
           onClick={() =>
             setFilter({

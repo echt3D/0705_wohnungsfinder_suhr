@@ -7,6 +7,7 @@ const initFilter = {
   floor: [],
   rooms: [],
   state: [],
+  liked: [],
 };
 
 const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
@@ -19,6 +20,8 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [rentalPrice, setRentalPrice] = useState<number[] | number>([0, 0]);
   const [filter, setFilter] = useState<FilterType>(initFilter);
   const [likedApartments, setLikedApartments] = useState<string[]>([]);
+  const [activateLikedApartments, setActivateLikedApartments] =
+    useState<boolean>(false);
 
   useEffect(() => {
     fetch("/api/get-all-apartments")
@@ -93,6 +96,14 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const filterByLikes = (apartments: Apartment[]) => {
+    if (!likedApartments.length) return apartments;
+    const filteredApartments = apartments.filter((apartment: Apartment) => {
+      if (likedApartments.includes(apartment.title)) return apartment;
+    });
+    return filteredApartments;
+  };
+
   const filterByRange = (
     apartments: Apartment[],
     category: keyof Apartment,
@@ -133,7 +144,12 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     const filteredByFloor = filterByCheckbox(filteredByrentalPrice, "floor");
     const filteredByRooms = filterByCheckbox(filteredByFloor, "rooms");
     const filteredByStatus = filterByCheckbox(filteredByRooms, "state");
-    // const filteredByLikes = filterByLikes(filteredByStatus);
+    if (activateLikedApartments) {
+      const filteredByLikes = filterByLikes(filteredByStatus);
+      return filteredByLikes;
+    } else {
+      return filteredByStatus;
+    }
 
     // switch (direction) {
     //   case "descendent":
@@ -149,7 +165,6 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     //     );
     //     break;
     // }
-    return filteredByStatus;
   };
 
   const value = {
@@ -169,6 +184,8 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     filterTargetApartments,
     handleLikedApartments,
     isLikedApartment,
+    activateLikedApartments,
+    setActivateLikedApartments,
   };
 
   return (
