@@ -24,6 +24,9 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     useState<boolean>(false);
   const [isDescendent, setIsDescendent] = useState<boolean>(true);
   const [sort, setSort] = useState<string | null>(null);
+  const [clickedApartment, setClickedApartment] = useState<Apartment | null>(
+    null
+  );
 
   useEffect(() => {
     fetch("/api/get-all-apartments")
@@ -194,6 +197,8 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     setIsDescendent,
     sort,
     setSort,
+    clickedApartment,
+    setClickedApartment,
   };
 
   return (

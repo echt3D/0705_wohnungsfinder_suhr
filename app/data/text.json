@@ -30,13 +30,14 @@
     "frei": "frei",
     "reserviert": "reserviert",
     "vermietet": "vermietet",
+    "apartment": "Whg.",
     "address": "Adresse",
     "open_floorplan": "Grundriss öffnen",
-    "date": "Daten",
-    "move_in_date": "Bezugstermin",
+    "data": "Daten",
+    "move_in_date": "Bezugstermin:",
     "properties": "Eigenschaften",
-    "space": "Fläche",
-    "floor": "Geschoss",
+    "space": "Wohnläche",
+    "rooms": "Zimmer",
     "apply": "Bewerben"
   },
   "option": {

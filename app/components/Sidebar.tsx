@@ -5,6 +5,7 @@ import { Content } from "../utils/types";
 import ApartmentCard from "./ApartmentCard";
 import Filter from "./Filter";
 import { ApartmentContext } from "../utils/createContext";
+import ApartmentDetail from "./ApartmentDetail";
 
 type SidebarProps = {
   t: Content;
@@ -12,7 +13,12 @@ type SidebarProps = {
 
 const Sidebar = ({ t }: SidebarProps) => {
   const [openFilter, setOpenFilter] = useState<boolean>(false);
-  const { apartments, filterTargetApartments } = useContext(ApartmentContext);
+  const {
+    apartments,
+    filterTargetApartments,
+    clickedApartment,
+    setClickedApartment,
+  } = useContext(ApartmentContext);
   return (
     <aside className="relative w-sidebar_desktop h-full gap-8 px-6 py-2 bg-secondary">
       <FilterButton
@@ -21,6 +27,7 @@ const Sidebar = ({ t }: SidebarProps) => {
         setOpenFilter={setOpenFilter}
       />
       {openFilter && <Filter setOpenFilter={setOpenFilter} />}
+      {clickedApartment && <ApartmentDetail />}
 
       <div className="overflow-scroll h-filter_desktop ">
         <ul className="flex flex-col gap-8 py-2">
@@ -28,7 +35,8 @@ const Sidebar = ({ t }: SidebarProps) => {
             filterTargetApartments(apartments).map((apartment, i) => (
               <li
                 key={i}
-                className="px-2 py-4 shadow-md border rounded-lg bg-white flex flex-col gap-2"
+                className="px-2 py-4 shadow-md border rounded-lg bg-white flex flex-col gap-2 hover:shadow-lg cursor-pointer"
+                onClick={() => setClickedApartment(apartment)}
               >
                 <ApartmentCard apartment={apartment} />
               </li>

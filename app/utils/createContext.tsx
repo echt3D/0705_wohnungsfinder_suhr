@@ -24,6 +24,8 @@ interface ApartmentContext {
   setIsDescendent: (isDescendent: boolean) => void;
   sort: string | null;
   setSort: (sort: string | null) => void;
+  clickedApartment: Apartment | null;
+  setClickedApartment: (clickedApartment: Apartment | null) => void;
 }
 
 export const ApartmentContext = createContext<ApartmentContext>({
@@ -49,4 +51,6 @@ export const ApartmentContext = createContext<ApartmentContext>({
   setIsDescendent: () => {},
   sort: null,
   setSort: () => {},
+  clickedApartment: null,
+  setClickedApartment: () => {},
 });
