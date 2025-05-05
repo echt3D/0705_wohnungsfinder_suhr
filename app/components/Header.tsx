@@ -1,5 +1,5 @@
 import Image from "next/image";
-// import Option from "./Option";
+import Option from "./Option";
 
 const Header = () => {
   return (
@@ -11,7 +11,7 @@ const Header = () => {
         alt="echt3D logo"
       />
 
-      {/* <Option t={t} /> */}
+      <Option />
     </header>
   );
 };

@@ -13,3 +13,7 @@
 .green {
   border: green solid 2px;
 }
+
+.apartment-svg {
+  cursor: pointer;
+}

@@ -26,6 +26,8 @@ interface ApartmentContext {
   setSort: (sort: string | null) => void;
   clickedApartment: Apartment | null;
   setClickedApartment: (clickedApartment: Apartment | null) => void;
+  showSVG: boolean;
+  setShowSVG: (showSVG: boolean) => void;
 }
 
 export const ApartmentContext = createContext<ApartmentContext>({
@@ -53,4 +55,6 @@ export const ApartmentContext = createContext<ApartmentContext>({
   setSort: () => {},
   clickedApartment: null,
   setClickedApartment: () => {},
+  showSVG: false,
+  setShowSVG: () => {},
 });

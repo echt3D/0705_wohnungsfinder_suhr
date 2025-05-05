@@ -110,7 +110,14 @@ const ApartmentDetail = () => {
               </div>
             </div>
           </div>
-          <Link href="" className="mt-auto w-full bg-primary text-white p-2 text-center rounded-xl hover:opacity-70 duration-200">
+          <Link
+            href=""
+            className={`mt-auto w-full bg-primary text-white p-2 text-center rounded-xl duration-200 ${
+              clickedApartment.state === "frei"
+                ? "hover:opacity-70 pointer-events-auto"
+                : "opacity-70 pointer-events-none"
+            }`}
+          >
             {apply}
           </Link>
         </div>

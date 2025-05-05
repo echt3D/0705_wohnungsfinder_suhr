@@ -43,6 +43,7 @@ export default {
       width: {
         sidebar_desktop: "375px",
         desktop: "calc(100vw - 375px)",
+        option_switch: "100px",
       },
       height: {
         desktop: "calc(100vh - 100px)",

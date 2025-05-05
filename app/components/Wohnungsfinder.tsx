@@ -25,8 +25,15 @@ const preloadImage = (src: string) => {
 };
 
 const Wohnungsfinder = () => {
-  const { apartments, hoveredApartment, setHoveredApartment, visu } =
-    useContext(ApartmentContext);
+  const {
+    apartments,
+    hoveredApartment,
+    setHoveredApartment,
+    visu,
+    showSVG,
+    clickedApartment,
+    setClickedApartment,
+  } = useContext(ApartmentContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   useLayoutEffect(() => {
@@ -77,6 +84,9 @@ const Wohnungsfinder = () => {
   const isHovered = (apartmentTitle: string | null) =>
     apartmentTitle === hoveredApartment?.apartmentId;
 
+  const isClicked = (apartmentTitle: string | null) =>
+    clickedApartment && apartmentTitle === clickedApartment.title;
+
   const getColorByStatus = (apartmentStatus: string | undefined) => {
     switch (apartmentStatus) {
       case "frei":
@@ -87,6 +97,12 @@ const Wohnungsfinder = () => {
         return "#535353";
     }
   };
+
+  const handleClick = (apartmentTitle: string) => {
+    const foundApartment = findApartmentByTitle(apartmentTitle);
+    setClickedApartment(foundApartment);
+  };
+
   if (containerSize.width === 0 || containerSize.height === 0) {
     return <div ref={containerRef} className="w-full h-desktop" />;
   }
@@ -122,39 +138,45 @@ const Wohnungsfinder = () => {
           {svgPathsArr.map((point, i) => (
             <Group
               key={i}
-              onMouseEnter={() => handleHover(point[0])}
-              onMouseLeave={() => handleHover(null)}
-              // onClick={() => handleClick(point[0])}
+              onMouseEnter={(e) => {
+                handleHover(point[0]);
+                const container = e.target.getStage()?.container();
+                if (container) container.style.cursor = "pointer";
+              }}
+              onMouseLeave={(e) => {
+                const container = e.target.getStage()?.container();
+                if (container) container.style.cursor = "default";
+                handleHover(null);
+              }}
+              onClick={() => handleClick(point[0])}
             >
-              {/* {showSVG ? ( */}
-              <Line
-                points={strToNum(point[1].split(" "))}
-                strokeWidth={4}
-                stroke="white"
-                closed={true}
-                fill={getColorByStatus(findApartmentByTitle(point[0])?.state)}
-                opacity={isHovered(point[0]) ? 0.8 : 0.4}
-              />
-              {/* ) : (
-                  <Line
-                    points={strToNum(point[1].split(" "))}
-                    strokeWidth={4}
-                    closed="true"
-                    stroke={
-                      isHovered(point[0]) || isClicked(point[0])
-                        ? "white"
-                        : "transparent"
-                    }
-                    fill={
-                      isHovered(point[0]) || isClicked(point[0])
-                        ? getColorByStatus(
-                            findApartmentByTitle(point[0]).stateSimplyfied
-                          )
-                        : "transparent"
-                    }
-                    opacity={0.8}
-                  />
-                )} */}
+              {showSVG ? (
+                <Line
+                  points={strToNum(point[1].split(" "))}
+                  strokeWidth={4}
+                  stroke="white"
+                  closed={true}
+                  fill={getColorByStatus(findApartmentByTitle(point[0])?.state)}
+                  opacity={isHovered(point[0]) ? 0.8 : 0.4}
+                />
+              ) : (
+                <Line
+                  points={strToNum(point[1].split(" "))}
+                  strokeWidth={4}
+                  closed={true}
+                  stroke={
+                    isHovered(point[0]) || isClicked(point[0])
+                      ? "white"
+                      : "transparent"
+                  }
+                  fill={
+                    isHovered(point[0]) || isClicked(point[0])
+                      ? getColorByStatus(findApartmentByTitle(point[0])?.state)
+                      : "transparent"
+                  }
+                  opacity={0.8}
+                />
+              )}
             </Group>
           ))}
         </Layer>
