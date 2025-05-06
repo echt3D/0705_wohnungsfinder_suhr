@@ -27,7 +27,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [clickedApartment, setClickedApartment] = useState<Apartment | null>(
     null
   );
-  const [showSVG, setShowSVG] = useState<boolean>(false);
+  const [showSVG, setShowSVG] = useState<boolean>(true);
 
   useEffect(() => {
     fetch("/api/get-all-apartments")

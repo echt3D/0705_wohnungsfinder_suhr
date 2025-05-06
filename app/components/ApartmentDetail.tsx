@@ -24,7 +24,7 @@ const ApartmentDetail = () => {
 
   return (
     clickedApartment && (
-      <section className="absolute top-0 left-0 w-sidebar_desktop h-full gap-8 px-6 py-2 bg-primary bg-opacity-70">
+      <section className="absolute z-20 top-0 left-0 w-sidebar_desktop h-full gap-8 px-6 py-2 bg-primary bg-opacity-70">
         <div className="bg-white rounded-xl h-full px-2 py-4 flex flex-col gap-8 w-full">
           <div className="flex justify-between items-center">
             <button

@@ -17,7 +17,6 @@ const Sidebar = ({ t }: SidebarProps) => {
     apartments,
     filterTargetApartments,
     clickedApartment,
-    setClickedApartment,
   } = useContext(ApartmentContext);
   return (
     <aside className="relative w-sidebar_desktop h-full gap-8 px-6 py-2 bg-secondary">
@@ -35,8 +34,7 @@ const Sidebar = ({ t }: SidebarProps) => {
             filterTargetApartments(apartments).map((apartment, i) => (
               <li
                 key={i}
-                className="px-2 py-4 shadow-md border rounded-lg bg-white flex flex-col gap-2 hover:shadow-lg cursor-pointer"
-                onClick={() => setClickedApartment(apartment)}
+                className="px-2 py-4 shadow-md border rounded-lg bg-white hover:shadow-lg cursor-pointer relative"
               >
                 <ApartmentCard apartment={apartment} />
               </li>
