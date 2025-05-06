@@ -1,0 +1,31 @@
+"use client";
+import DashboardHeader from "../components/DashboardHeader";
+import DashboardSidebar from "../components/DashboardSidebar";
+import { useState } from "react";
+
+const Layout = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
+  const [navIsClicked, setNavIsClicked] = useState(false);
+
+  return (
+    <>
+      <DashboardHeader />
+      <main className="flex w-full font-neue-kabel-regular text-body_desktop">
+        <DashboardSidebar
+          navIsClicked={navIsClicked}
+          setNavIsClicked={setNavIsClicked}
+        />
+        <aside
+          className={`fixed h-desktop left-dashboard_sidebar_width top-dashboard_header_height w-dashboard_closed_desktop overflow-scroll`}
+        >
+          {children}
+        </aside>
+      </main>
+    </>
+  );
+};
+
+export default Layout;

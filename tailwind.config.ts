@@ -39,11 +39,17 @@ export default {
         text_secondary: "#FF5D47",
         text_tertiary: "#ffffff",
         like: "#FF5D47",
+        dashboard_primary: "#001D3D",
+        dashboard_secondary: "#D14600",
       },
       width: {
         sidebar_desktop: "375px",
         desktop: "calc(100vw - 375px)",
         option_switch: "100px",
+        dashboard_sidebar_closed_desktop: "100px",
+        dashboard_sidebar_open_desktop: "240px",
+        dashboard_closed_desktop: "calc(100vw - 100px)",
+        dashboard_open_desktop: "calc(100vw - 240px)",
       },
       height: {
         desktop: "calc(100vh - 100px)",
@@ -57,9 +63,21 @@ export default {
       fontSize: {
         sm: "12px",
         md: "14px",
+
+        h1_desktop: "47px",
+        h2_desktop: "40px",
+        h3_desktop: "33px",
+        h4_desktop: "25px",
+        h5_desktop: "23px",
+        body_desktop: "16px",
+        body_small_desktop: "12px",
       },
       inset: {
         filter_desktop: "62px",
+        dashboard_sidebar_width: "100px",
+      },
+      boxShadow: {
+        custom_sidebar: "5px 0px 12px 0px rgba(0, 0, 0, 0.20)",
       },
     },
   },

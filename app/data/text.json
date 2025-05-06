@@ -1,4 +1,5 @@
 {
+  "project_name": "BAMA",
   "main": {
     "loading": "laden..."
   },
@@ -43,5 +44,20 @@
   "option": {
     "option": "Option",
     "show_availability": "Verfügbarkeiten dauerhaft anzeigen"
+  },
+  "dashboard": {
+    "main": {
+      "title": {
+        "one": "Alles im Blick: Dein personalisiertes",
+        "two": "Analyse-Dashboard"
+      },
+      "circles": {
+        "calls": "Aufrufe",
+        "previous_month_visitors": "Besuche",
+        "visitors": "Besucher",
+        "bounce_rate": "Absprungrate",
+        "visit_duration": "Dauer des Besuchs"
+      }
+    }
   }
 }
