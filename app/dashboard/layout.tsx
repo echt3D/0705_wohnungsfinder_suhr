@@ -13,13 +13,13 @@ const Layout = ({
   return (
     <>
       <DashboardHeader />
-      <main className="flex w-full font-neue-kabel-regular text-body_desktop">
+      <main className="flex w-full font-neue-kabel-regular text-body_desktop mt-header_desktop">
         <DashboardSidebar
           navIsClicked={navIsClicked}
           setNavIsClicked={setNavIsClicked}
         />
         <aside
-          className={`fixed h-desktop left-dashboard_sidebar_width top-dashboard_header_height w-dashboard_closed_desktop overflow-scroll`}
+          className={`absolute min-h-desktop left-dashboard_sidebar_width top-dashboard_header_height w-dashboard_closed_desktop overflow-scroll  `}
         >
           {children}
         </aside>

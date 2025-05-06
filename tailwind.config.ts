@@ -57,6 +57,16 @@ export default {
         filter_button_desktop: "56px",
         filter_desktop: "calc(100vh - 100px - 64px)",
       },
+      maxWidth: {
+        desktop: "1200px",
+        tablet: "700px",
+      },
+      minHeight: {
+        desktop: "calc(100vh - 100px)",
+      },
+      margin: {
+        header_desktop: "100px",
+      },
       fontFamily: {
         neue_kabel: ["neue-kabel", "sans-serif"],
       },

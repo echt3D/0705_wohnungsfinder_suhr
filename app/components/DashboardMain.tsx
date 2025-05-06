@@ -5,8 +5,8 @@ const DashboardMain = () => {
   const { project_name } = t;
   const { title } = t.dashboard.main;
   return (
-    <div className="bg-dashboard_primary w-full h-full  flex flex-col justify-center items-center red text-white">
-      <section className=" flex flex-col justify-center items-center">
+    <section className="bg-dashboard_primary   flex flex-col justify-center items-center h-desktop  text-white">
+      <div className=" flex flex-col justify-center items-center mx-auto max-w-desktop ">
         <p className="text-dashboard_secondary text-h2_desktop font-light">
           {project_name}
         </p>
@@ -14,9 +14,9 @@ const DashboardMain = () => {
           {title.one} <br />
           {title.two}
         </h1>
-      </section>
+      </div>
       <DashboardCircles />
-    </div>
+    </section>
   );
 };
 

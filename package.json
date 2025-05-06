@@ -16,6 +16,8 @@
     "@heroui/radio": "^2.3.16",
     "@heroui/react": "^2.7.4",
     "@heroui/slider": "^2.4.8",
+    "@nivo/core": "^0.93.0",
+    "@nivo/line": "^0.93.0",
     "@prisma/client": "^6.4.1",
     "canvas": "^3.1.0",
     "framer-motion": "^12.4.10",
