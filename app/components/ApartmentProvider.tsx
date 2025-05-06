@@ -149,6 +149,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     const rentalPriceMinMax = rentalPrice as number[];
     let targetApartments: Apartment[];
 
+    if (!Array.isArray(apartmentsCopy)) return [];
     const filteredBySpace = filterByRange(
       apartmentsCopy,
       "area",
