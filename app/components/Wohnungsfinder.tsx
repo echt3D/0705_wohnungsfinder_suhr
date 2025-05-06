@@ -33,6 +33,7 @@ const Wohnungsfinder = () => {
     showSVG,
     clickedApartment,
     setClickedApartment,
+    filterTargetApartments,
   } = useContext(ApartmentContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
@@ -64,9 +65,23 @@ const Wohnungsfinder = () => {
   const widthScale = containerSize.width / bounds.width;
   const scaleRatio = Math.max(heightScale, widthScale);
 
-  const svgPathsArr = Object.entries(
-    svgData[visu?.toString() as keyof typeof svgData]
-  );
+  const svgPathsArr = () => {
+    const apartmentSVG = Object.entries(
+      svgData[visu?.toString() as keyof typeof svgData]
+    );
+
+    const filteredApartmentIds = filterTargetApartments(apartments).map(
+      (apartment) => apartment.apartmentId
+    );
+
+    const filteredApartments = apartmentSVG.filter((aptSVG) => {
+      const [apartmentId] = aptSVG;
+      return filteredApartmentIds.includes(apartmentId);
+    });
+
+    return filteredApartments;
+  };
+
   const strToNum = (points: string[]) => points.map((point) => Number(point));
 
   const findApartmentByTitle = (apartmentTitle: string | null) =>
@@ -135,7 +150,7 @@ const Wohnungsfinder = () => {
             />
           )}
           <Group className="relative"></Group>
-          {svgPathsArr.map((point, i) => (
+          {svgPathsArr().map((point, i) => (
             <Group
               key={i}
               onMouseEnter={(e) => {
