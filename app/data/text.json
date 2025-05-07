@@ -72,6 +72,14 @@
           "link": ""
         }
       }
+    },
+    "apartment_overview": {
+      "title": "Wohnungen im Blick",
+      "text": "Verwalte Wohnungen und passe Details flexibel an. Intuitive Organisation – einfach und effizient!",
+      "button": {
+        "label": "Zu den Wohnungen",
+        "link": ""
+      }
     }
   }
 }
