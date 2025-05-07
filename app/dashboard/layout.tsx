@@ -2,6 +2,7 @@
 import DashboardHeader from "../components/DashboardHeader";
 import DashboardSidebar from "../components/DashboardSidebar";
 import { useState } from "react";
+import DashboardFooter from "../components/DashboardFooter";
 
 const Layout = ({
   children,
@@ -13,6 +14,7 @@ const Layout = ({
   return (
     <>
       <DashboardHeader />
+
       <main className="flex w-full font-neue-kabel-regular text-body_desktop mt-header_desktop">
         <DashboardSidebar
           navIsClicked={navIsClicked}
@@ -22,6 +24,7 @@ const Layout = ({
           className={`absolute min-h-desktop left-dashboard_sidebar_width top-dashboard_header_height w-dashboard_closed_desktop overflow-scroll  `}
         >
           {children}
+          <DashboardFooter />
         </aside>
       </main>
     </>

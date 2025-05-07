@@ -96,6 +96,21 @@
         "label": "Zur Mediathek",
         "link": ""
       }
+    },
+    "footer": {
+      "title": "Brauchst du Hilfe oder suchst du Informationen?",
+      "text": {
+        "one": "Wir sind gerne für dich da.",
+        "two": " Ruf uns an oder teile dein Anliegen per E-Mail mit uns."
+      },
+      "company": "echt3D",
+      "address": "Helvetiaplatz Molkenstrasse 15, 8004 Zürich",
+      "phone": "+41 44 545 29 90",
+      "mobile": "+41 79 341 10 80",
+      "email": "office@echt3d.ch",
+      "instagram": "https://www.instagram.com/echt3d/",
+      "linkedin": "https://www.linkedin.com/company/echt3d-gmbh",
+      "website": "https://www.echt3d.ch/"
     }
   }
 }
