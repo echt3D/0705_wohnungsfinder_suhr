@@ -57,6 +57,20 @@
         "visitors": "Besucher",
         "bounce_rate": "Absprungrate",
         "visit_duration": "Dauer des Besuchs"
+      },
+      "real_time": {
+        "title": "Echtzeit",
+        "button": {
+          "label": "Zur Websitestatistik",
+          "link": ""
+        }
+      },
+      "statistic": {
+        "title": "Statistik",
+        "button": {
+          "label": "Zur Statistik",
+          "link": ""
+        }
       }
     }
   }

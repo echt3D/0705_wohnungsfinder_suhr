@@ -5,7 +5,7 @@ const DashboardMain = () => {
   const { project_name } = t;
   const { title } = t.dashboard.main;
   return (
-    <section className="bg-dashboard_primary   flex flex-col justify-center items-center h-desktop  text-white">
+    <section className="bg-dashboard_primary   flex flex-col justify-center items-center h-desktop  text-white  py-20">
       <div className=" flex flex-col justify-center items-center mx-auto max-w-desktop ">
         <p className="text-dashboard_secondary text-h2_desktop font-light">
           {project_name}

@@ -41,6 +41,7 @@ export default {
         like: "#FF5D47",
         dashboard_primary: "#001D3D",
         dashboard_secondary: "#D14600",
+        dashboard_tertiary: "#E7E2E0",
       },
       width: {
         sidebar_desktop: "375px",
@@ -73,7 +74,6 @@ export default {
       fontSize: {
         sm: "12px",
         md: "14px",
-
         h1_desktop: "47px",
         h2_desktop: "40px",
         h3_desktop: "33px",
@@ -89,6 +89,9 @@ export default {
       boxShadow: {
         custom_sidebar: "5px 0px 12px 0px rgba(0, 0, 0, 0.20)",
       },
+    },
+    screens: {
+      "2xl": "110rem",
     },
   },
   plugins: [heroui()],
