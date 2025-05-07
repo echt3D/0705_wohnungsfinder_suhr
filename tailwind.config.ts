@@ -88,6 +88,7 @@ export default {
       },
       boxShadow: {
         custom_sidebar: "5px 0px 12px 0px rgba(0, 0, 0, 0.20)",
+        custom: "1px 1px 4px 4px rgba(0,0,0,0.1)",
       },
     },
     screens: {

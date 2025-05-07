@@ -3365,20 +3365,3 @@ export const rawApartments: Apartment[] = [
     referenceNumber: "12.001",
   },
 ];
-
-export const findDuplicateApartmentIds = (
-  apartments: Apartment[]
-): string[] | true => {
-  const seen = new Set<string>();
-  const duplicates = new Set<string>();
-
-  for (const apartment of apartments) {
-    if (seen.has(apartment.apartmentId)) {
-      duplicates.add(apartment.apartmentId);
-    } else {
-      seen.add(apartment.apartmentId);
-    }
-  }
-
-  return duplicates.size > 0 ? Array.from(duplicates) : true;
-};

@@ -108,7 +108,7 @@
         "all": "Alle",
         "free": "Frei",
         "occupied": "Reserviert",
-        "reserved": "Gemietet"
+        "reserved": "Vermietet"
       },
       "apartment_status_block": {
         "title": "Wohnungsstatus"
