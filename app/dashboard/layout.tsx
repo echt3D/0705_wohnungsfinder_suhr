@@ -3,6 +3,7 @@ import DashboardHeader from "../components/DashboardHeader";
 import DashboardSidebar from "../components/DashboardSidebar";
 import { useState } from "react";
 import DashboardFooter from "../components/DashboardFooter";
+import ApartmentProvider from "../components/ApartmentProvider";
 
 const Layout = ({
   children,
@@ -12,7 +13,7 @@ const Layout = ({
   const [navIsClicked, setNavIsClicked] = useState(false);
 
   return (
-    <>
+    <ApartmentProvider>
       <DashboardHeader />
 
       <main className="flex w-full font-neue-kabel-regular text-body_desktop mt-header_desktop">
@@ -27,7 +28,7 @@ const Layout = ({
           <DashboardFooter />
         </aside>
       </main>
-    </>
+    </ApartmentProvider>
   );
 };
 

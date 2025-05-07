@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import DashboardIcon from "./DashboardIcon";
 import ApartmentIcon from "./ApartmentIcon";
+import t from "../data/text.json";
 
 type DashboardSidebarProps = {
   navIsClicked: boolean;
@@ -13,8 +14,8 @@ const DashboardSidebar = ({
   navIsClicked,
   setNavIsClicked,
 }: DashboardSidebarProps) => {
+  const { dashboard, apartment } = t.dashboard.sidebar;
   const path = usePathname();
-
   const navIsActive = (pathname: string) => pathname === path;
 
   return (
@@ -53,7 +54,7 @@ const DashboardSidebar = ({
                       : "text-text_tertiary"
                   }`}
                 >
-                  Dashboard
+                  {dashboard}
                 </span>
               )}
             </Link>
@@ -83,7 +84,7 @@ const DashboardSidebar = ({
                       : "text-text_tertiary"
                   }`}
                 >
-                  Gewerbesliste
+                  {apartment}
                 </span>
               )}
             </Link>

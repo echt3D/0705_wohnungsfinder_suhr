@@ -46,6 +46,10 @@
     "show_availability": "Verfügbarkeiten dauerhaft anzeigen"
   },
   "dashboard": {
+    "sidebar": {
+      "dashboard": "dashboard",
+      "apartment": "Wohnungen"
+    },
     "main": {
       "title": {
         "one": "Alles im Blick: Dein personalisiertes",
@@ -95,6 +99,16 @@
       "button": {
         "label": "Zur Mediathek",
         "link": ""
+      }
+    },
+    "apartments": {
+      "main": {
+        "lead": "Verwalten",
+        "title": "Wohnungen",
+        "all": "Alle",
+        "free": "Frei",
+        "occupied": "Besetzt",
+        "reserved": "Reserviert"
       }
     },
     "footer": {
