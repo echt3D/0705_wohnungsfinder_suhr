@@ -107,8 +107,11 @@
         "title": "Wohnungen",
         "all": "Alle",
         "free": "Frei",
-        "occupied": "Besetzt",
-        "reserved": "Reserviert"
+        "occupied": "Reserviert",
+        "reserved": "Gemietet"
+      },
+      "apartment_status_block": {
+        "title": "Wohnungsstatus"
       }
     },
     "footer": {

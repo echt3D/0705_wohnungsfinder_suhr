@@ -15,7 +15,7 @@ datasource db {
 
 model Apartment {
   id                      Int      @id @default(autoincrement())
-  apartmentId             String
+  apartmentId             String   @unique
   address                 String
   factsheet               String?
   incidentalCosts         Int?

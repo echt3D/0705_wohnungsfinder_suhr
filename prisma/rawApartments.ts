@@ -225,34 +225,7 @@ export const rawApartments: Apartment[] = [
     reduitArea: 0,
     referenceNumber: "12.102",
   },
-  {
-    apartmentId: "W13_101",
-    address: "Baarermatte, 6340 Baar",
-    factsheet: "",
-    incidentalCosts: 90,
-    state: "frei",
-    moveInDate: null,
-    floor: "1.OG",
-    floorNum: 1,
-    priceUnit: "CHF",
-    rentalPrice: 2200,
-    rentalPriceSquaremeterNet: 0,
-    rentalPriceSquaremeter: 0,
-    title: "W13_101",
-    name: "13.101",
-    rooms: 2.5,
-    area: 67,
-    virtualTourLink: "",
-    balcony: 12,
-    loggiaArea: 0,
-    gardenSittingPlaceArea: 0,
-    terraceArea: 0,
-    basementArea: 10,
-    parkingSpaceCost: 0,
-    deposit: 0,
-    reduitArea: 0,
-    referenceNumber: "13.101",
-  },
+
   {
     apartmentId: "W13_102",
     address: "Baarermatte, 6340 Baar",
@@ -364,34 +337,6 @@ export const rawApartments: Apartment[] = [
     deposit: 0,
     reduitArea: 0,
     referenceNumber: "12.202",
-  },
-  {
-    apartmentId: "W13_101",
-    address: "Baarermatte, 6340 Baar",
-    factsheet: "",
-    incidentalCosts: 90,
-    state: "frei",
-    moveInDate: null,
-    floor: "2.OG",
-    floorNum: 2,
-    priceUnit: "CHF",
-    rentalPrice: 2300,
-    rentalPriceSquaremeterNet: 0,
-    rentalPriceSquaremeter: 0,
-    title: "W13_101",
-    name: "13.101",
-    rooms: 2.5,
-    area: 67,
-    virtualTourLink: "",
-    balcony: 12,
-    loggiaArea: 0,
-    gardenSittingPlaceArea: 0,
-    terraceArea: 0,
-    basementArea: 10,
-    parkingSpaceCost: 0,
-    deposit: 0,
-    reduitArea: 0,
-    referenceNumber: "13.101",
   },
   {
     apartmentId: "W13_101",
@@ -1569,34 +1514,7 @@ export const rawApartments: Apartment[] = [
     reduitArea: 0,
     referenceNumber: "22.502",
   },
-  {
-    apartmentId: "W31_001",
-    address: "Baarermatte, 6340 Baar",
-    factsheet: "",
-    incidentalCosts: 90,
-    state: "frei",
-    moveInDate: null,
-    floor: "EG",
-    floorNum: 0,
-    priceUnit: "CHF",
-    rentalPrice: 2000,
-    rentalPriceSquaremeterNet: 0,
-    rentalPriceSquaremeter: 0,
-    title: "W31_001",
-    name: "31.001",
-    rooms: 2.5,
-    area: 60,
-    virtualTourLink: "",
-    balcony: 0,
-    loggiaArea: 0,
-    gardenSittingPlaceArea: 12,
-    terraceArea: 0,
-    basementArea: 10,
-    parkingSpaceCost: 0,
-    deposit: 0,
-    reduitArea: 0,
-    referenceNumber: "31.001",
-  },
+
   {
     apartmentId: "W31_001",
     address: "Baarermatte, 6340 Baar",
@@ -3448,3 +3366,19 @@ export const rawApartments: Apartment[] = [
   },
 ];
 
+export const findDuplicateApartmentIds = (
+  apartments: Apartment[]
+): string[] | true => {
+  const seen = new Set<string>();
+  const duplicates = new Set<string>();
+
+  for (const apartment of apartments) {
+    if (seen.has(apartment.apartmentId)) {
+      duplicates.add(apartment.apartmentId);
+    } else {
+      seen.add(apartment.apartmentId);
+    }
+  }
+
+  return duplicates.size > 0 ? Array.from(duplicates) : true;
+};

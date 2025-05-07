@@ -1,7 +1,7 @@
 const ApartmentStatusBlock = () => {
   return (
     <section>
-      <div>hi</div>
+      <div className="max-w-desktop mx-auto">hi</div>
     </section>
   );
 };
