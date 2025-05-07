@@ -2,7 +2,7 @@ import t from "../data/text.json";
 import Link from "next/link";
 
 const ApartmentOverviewBlock = () => {
-  const { title, text, button } = t.dashboard.apartment_overview;
+  const { title, text, button } = t.dashboard.apartment_overview_block;
   return (
     <div className="bg-dashboard_primary py-20 px-20 flex justify-center">
       <div className="flex flex-col gap-8 w-2/3">

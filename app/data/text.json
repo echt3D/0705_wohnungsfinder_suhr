@@ -73,11 +73,27 @@
         }
       }
     },
-    "apartment_overview": {
+    "apartment_overview_block": {
       "title": "Wohnungen im Blick",
       "text": "Verwalte Wohnungen und passe Details flexibel an. Intuitive Organisation – einfach und effizient!",
       "button": {
         "label": "Zu den Wohnungen",
+        "link": ""
+      }
+    },
+    "document_block": {
+      "title": "Deine Dokumente",
+      "text": "Eine übersichtliche Darstellung deiner hochgeladenen Dokumente, die den aktuellen Projektstatus klar widerspiegelt.",
+      "button": {
+        "label": "Zu den Dokumenten",
+        "link": ""
+      }
+    },
+    "media_block": {
+      "title": "Mediathek",
+      "text": "Alle Bilder und Videos übersichtlich gespeichert – schnell finden, was du suchst!",
+      "button": {
+        "label": "Zur Mediathek",
         "link": ""
       }
     }
