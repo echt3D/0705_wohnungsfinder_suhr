@@ -113,6 +113,16 @@
       "apartment_status_block": {
         "title": "Wohnungsstatus",
         "status_value": ["frei", "reserviert", "vermietet"]
+      },
+      "apartment_details_block": {
+        "title": "Details zu Wohnungen",
+        "aparment_details_card": {
+          "area_label": "Grösse",
+          "rooms_label": "Zimmer",
+          "floor_label": "Etage",
+          "description_label": "Beschrieb",
+          "notes_label": "Notizen"
+        }
       }
     },
     "footer": {

@@ -12,7 +12,7 @@ const ApartmentStatusBlock = ({ apartments }: ApartmentStatusBlockProps) => {
     <section className="py-20">
       <div className="max-w-desktop mx-auto flex flex-col items-center justify-center">
         <h2 className="text-h2_desktop">{title}</h2>
-        <ul className="grid grid-cols-4 gap-4 z-10">
+        <ul className="grid grid-cols-4 gap-8 z-10">
           {apartments.map((apartment, i) => (
             <li key={i}>
               <ApartmentStatusCard

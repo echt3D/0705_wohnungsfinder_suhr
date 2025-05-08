@@ -13,8 +13,8 @@ const Apartments = () => {
     <>
       <ApartmentsMain apartments={apartments} />
       <ApartmentStatusBlock apartments={apartments} />
+      <ApartmentDetailsBlock apartments={apartments} />
       <DocumentBlock />
-      <ApartmentDetailsBlock />
     </>
   );
 };
