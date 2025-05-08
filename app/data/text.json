@@ -111,7 +111,8 @@
         "reserved": "Vermietet"
       },
       "apartment_status_block": {
-        "title": "Wohnungsstatus"
+        "title": "Wohnungsstatus",
+        "status_value": ["frei", "reserviert", "vermietet"]
       }
     },
     "footer": {

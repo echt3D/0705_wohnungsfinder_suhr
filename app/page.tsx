@@ -11,7 +11,7 @@ export default function Home() {
       <Header />
       <main className="w-screen h-desktop flex place-items-center place-content-center">
         <Sidebar t={t} />
-        <aside className="h-full w-desktop">
+        <aside className="h-full w-desktop relative">
           <Wohnungsfinder />
           <Navigation />
         </aside>

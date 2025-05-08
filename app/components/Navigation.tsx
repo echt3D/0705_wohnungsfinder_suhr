@@ -12,7 +12,7 @@ const Navigation = () => {
   const switchLeft = () => (visu > 1001 ? setVisu(visu - 1) : setVisu(1012));
 
   return (
-    <div className="xl:absolute xl:bottom-8 right-16 flex flex-row gap-2">
+    <div className="absolute bottom-8 right-16 flex flex-row gap-2">
       <button
         className="w-12 h-12 rounded-full bg-white flex place-items-center place-content-center "
         onClick={() => switchRight()}

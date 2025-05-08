@@ -91,9 +91,6 @@ export default {
         custom: "1px 1px 4px 4px rgba(0,0,0,0.1)",
       },
     },
-    screens: {
-      "2xl": "110rem",
-    },
   },
   plugins: [heroui()],
 } satisfies Config;

@@ -1,13 +1,15 @@
 "use client";
 import t from "../data/text.json";
 import ApartmentStatusCircle from "./ApartmentStatusCircle";
-import { ApartmentContext } from "../utils/createContext";
-import { useContext } from "react";
+import { Apartment } from "../utils/types";
 
-const ApartmentsMain = () => {
+type ApartmentMainProps = {
+  apartments: Apartment[];
+};
+
+const ApartmentsMain = ({ apartments }: ApartmentMainProps) => {
   const { lead, title, all, free, occupied, reserved } =
     t.dashboard.apartments.main;
-  const { apartments } = useContext(ApartmentContext);
 
   const getValueByApartmentStatus = (status: string): number => {
     const apartmentsByStatus = apartments.filter(
@@ -18,7 +20,7 @@ const ApartmentsMain = () => {
 
   return (
     <section className="bg-dashboard_primary py-20">
-      <div className="max-w-desktop mx-auto flex flex-col gap-20">
+      <div className="max-w-desktop mx-auto flex flex-col gap-8">
         <div className="flex flex-col items-center w-full ">
           <p className="text-dashboard_secondary text-h2_desktop font-light">
             {lead}
