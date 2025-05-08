@@ -11,7 +11,7 @@ const ApartmentDetailsBlock = ({ apartments }: ApartmentDetailsBlockProps) => {
 
   return (
     <section className="bg-dashboard_tertiary py-20 ">
-      <div className="max-w-desktop mx-auto flex flex-col items-center">
+      <div className="max-w-desktop mx-auto flex flex-col items-center gap-16">
         <h2 className="text-h2_desktop">{title}</h2>
         <ul className="grid grid-cols-3 gap-8  w-full z-10">
           {apartments.map((apartment, i) => (
