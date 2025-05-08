@@ -1,10 +1,12 @@
+import t from "../data/text.json";
+
 interface FilterButtonProps {
-  t: string;
   openFilter: boolean;
   setOpenFilter: (openFilter: boolean) => void;
 }
 
-const FilterButton = ({ t, openFilter, setOpenFilter }: FilterButtonProps) => {
+const FilterButton = ({ openFilter, setOpenFilter }: FilterButtonProps) => {
+  const { sort_filter } = t.filter;
   return (
     <section
       onClick={() => setOpenFilter(!openFilter)}
@@ -22,7 +24,7 @@ const FilterButton = ({ t, openFilter, setOpenFilter }: FilterButtonProps) => {
           <path d="M8.84523 9.54405C9.05359 9.73215 9.16785 9.98105 9.16785 10.2356V17.7634C9.16785 18.2156 9.82205 18.4474 10.2074 18.1282L12.7167 15.7209C13.0527 15.3827 13.2387 15.2174 13.2387 14.883V10.2375C13.2387 9.98295 13.3552 9.73595 13.5613 9.54595L20.7621 3.00615C21.302 2.51595 20.8853 1.71985 20.0877 1.71985H2.31887C1.52128 1.71985 1.10456 2.51405 1.6445 3.00615L8.84523 9.54405Z" />
         </svg>
         <div className="hidden md:block">
-          <p className="text-sm">{t}</p>
+          <p className="text-sm">{sort_filter}</p>
         </div>
       </div>
       <div>

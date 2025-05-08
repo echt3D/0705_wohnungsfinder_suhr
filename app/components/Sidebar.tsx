@@ -1,30 +1,18 @@
 "use client";
 import { useState, useContext } from "react";
 import FilterButton from "./FilterButton";
-import { Content } from "../utils/types";
 import ApartmentCard from "./ApartmentCard";
 import Filter from "./Filter";
 import { ApartmentContext } from "../utils/createContext";
 import ApartmentDetail from "./ApartmentDetail";
 
-type SidebarProps = {
-  t: Content;
-};
-
-const Sidebar = ({ t }: SidebarProps) => {
+const Sidebar = () => {
   const [openFilter, setOpenFilter] = useState<boolean>(false);
-  const {
-    apartments,
-    filterTargetApartments,
-    clickedApartment,
-  } = useContext(ApartmentContext);
+  const { apartments, filterTargetApartments, clickedApartment } =
+    useContext(ApartmentContext);
   return (
     <aside className="relative w-sidebar_desktop h-full gap-8 px-6 py-2 bg-secondary">
-      <FilterButton
-        t={(t.filter as Content).sort_filter as string}
-        openFilter={openFilter}
-        setOpenFilter={setOpenFilter}
-      />
+      <FilterButton openFilter={openFilter} setOpenFilter={setOpenFilter} />
       {openFilter && <Filter setOpenFilter={setOpenFilter} />}
       {clickedApartment && <ApartmentDetail />}
 
