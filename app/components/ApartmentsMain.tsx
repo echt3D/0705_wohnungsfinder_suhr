@@ -39,7 +39,7 @@ const ApartmentsMain = ({ apartments }: ApartmentMainProps) => {
           />
           <ApartmentStatusCircle
             label={reserved}
-            value={getValueByApartmentStatus("gemietet")}
+            value={getValueByApartmentStatus("vermietet")}
           />
         </div>
       </div>
