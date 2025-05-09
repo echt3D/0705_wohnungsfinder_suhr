@@ -34,6 +34,7 @@
     "apartment": "Whg.",
     "address": "Adresse",
     "open_floorplan": "Grundriss öffnen",
+    "virtual_tour": "Rundgang",
     "data": "Daten",
     "move_in_date": "Bezugstermin:",
     "properties": "Eigenschaften",
@@ -125,9 +126,8 @@
         }
       }
     },
-    "edit_popup" : {
+    "edit_popup": {
       "title": "Bearbeitung"
-
     },
     "footer": {
       "title": "Brauchst du Hilfe oder suchst du Informationen?",

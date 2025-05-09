@@ -20,6 +20,7 @@ const ApartmentDetail = () => {
     space,
     rooms,
     apply,
+    virtual_tour,
   } = t.details;
 
   return (
@@ -53,15 +54,24 @@ const ApartmentDetail = () => {
           <div className="w-full flex flex-col gap-2">
             <p className="text-md text-primary">{address}</p>
             <p>{clickedApartment.address}</p>
-            <a
-              href={
-                clickedApartment.factsheet ? clickedApartment.factsheet : ""
-              }
-              target="_blank"
-              className="w-full border-primary border-2 block text-center p-2 rounded-full text-primary hover:text-white hover:bg-primary duration-200"
-            >
-              {open_floorplan}
-            </a>
+            {clickedApartment.factsheet && (
+              <a
+                href={clickedApartment.factsheet}
+                target="_blank"
+                className="w-full border-primary border-2 block text-center p-2 rounded-full text-primary hover:text-white hover:bg-primary duration-200"
+              >
+                {open_floorplan}
+              </a>
+            )}
+            {clickedApartment.virtualTourLink && (
+              <a
+                href={clickedApartment.virtualTourLink}
+                target="_blank"
+                className="w-full border-primary border-2 block text-center p-2 rounded-full text-primary hover:text-white hover:bg-primary duration-200"
+              >
+                {virtual_tour}
+              </a>
+            )}
           </div>
           <div className="w-full flex flex-col gap-2">
             <p className="text-md text-primary">{data}</p>
