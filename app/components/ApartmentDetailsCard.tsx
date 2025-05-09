@@ -71,7 +71,12 @@ const ApartmentDetailsCard = ({ apartment }: ApartmentDetailsCardProps) => {
           </div>
         </div>
       </div>
-      {editApartment && <EditApartmentPopup apartment={apartment} />}
+      {editApartment && (
+        <EditApartmentPopup
+          apartment={apartment}
+          setEditApartment={setEditApartment}
+        />
+      )}
     </>
   );
 };
