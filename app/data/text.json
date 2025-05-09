@@ -127,7 +127,8 @@
       }
     },
     "edit_popup": {
-      "title": "Bearbeitung"
+      "title": "Bearbeitung",
+      "save_change": "Änderungen speichern >"
     },
     "footer": {
       "title": "Brauchst du Hilfe oder suchst du Informationen?",

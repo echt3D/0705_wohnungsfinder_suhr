@@ -4,7 +4,7 @@ const dbClient = new PrismaClient();
 
 export const PATCH = async (req: Request) => {
   const body = await req.json();
-  const { apartmentId, state, area, floor, rooms, description, notes } = body;
+  const { apartmentId, area, floor, rooms, description, notes } = body;
 
   try {
     const foundApartment = await dbClient.apartment.findFirst({
@@ -20,7 +20,6 @@ export const PATCH = async (req: Request) => {
     const updatedApartment = await dbClient.apartment.update({
       where: { apartmentId },
       data: {
-        state,
         area,
         floor,
         rooms,
