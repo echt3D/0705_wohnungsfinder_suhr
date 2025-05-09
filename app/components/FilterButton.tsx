@@ -10,7 +10,7 @@ const FilterButton = ({ openFilter, setOpenFilter }: FilterButtonProps) => {
   return (
     <section
       onClick={() => setOpenFilter(!openFilter)}
-      className={`w-full shadow-xl border bg-secondary rounded-lg flex justify-between items-center cursor-pointer p-4 text-text_primary h-filter_button_desktop
+      className={`w-fit md:w-1/4 xl:w-full shadow-xl border bg-secondary rounded-lg flex justify-between items-center cursor-pointer p-4 text-text_primary h-filter_button_desktop
       }`}
     >
       <div className="flex gap-2 items-center">
@@ -18,7 +18,7 @@ const FilterButton = ({ openFilter, setOpenFilter }: FilterButtonProps) => {
           width="23"
           height="20"
           viewBox="0 0 23 20"
-          className={"fill-text_primary"}
+          className="fill-text_primary"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path d="M8.84523 9.54405C9.05359 9.73215 9.16785 9.98105 9.16785 10.2356V17.7634C9.16785 18.2156 9.82205 18.4474 10.2074 18.1282L12.7167 15.7209C13.0527 15.3827 13.2387 15.2174 13.2387 14.883V10.2375C13.2387 9.98295 13.3552 9.73595 13.5613 9.54595L20.7621 3.00615C21.302 2.51595 20.8853 1.71985 20.0877 1.71985H2.31887C1.52128 1.71985 1.10456 2.51405 1.6445 3.00615L8.84523 9.54405Z" />
@@ -27,13 +27,13 @@ const FilterButton = ({ openFilter, setOpenFilter }: FilterButtonProps) => {
           <p className="text-sm">{sort_filter}</p>
         </div>
       </div>
-      <div>
+      <div className="hidden md:block">
         <svg
           width="8"
           height="6"
           viewBox="0 0 10 6"
           xmlns="http://www.w3.org/2000/svg"
-          className={`fill-text_primary hidden md:block 
+          className={`fill-text_primary 
             ${openFilter ? "rotate-180" : "rotate-0"}
           `}
         >

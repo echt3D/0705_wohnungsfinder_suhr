@@ -76,8 +76,8 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
     (filter[name as keyof FilterType] as string[]).includes(value);
 
   return (
-    <div className="w-full h-filter_desktop   absolute top-filter_desktop px-6 pt-2 left-0 z-20">
-      <div className="flex flex-col gap-8 bg-white px-4 py-2 h-full">
+    <div className="w-full xl:h-filter_desktop  fixed bottom-0  xl:absolute  xl:top-filter_desktop px-6 pt-2 left-0 z-20">
+      <div className="flex flex-col gap-8 bg-white px-4 py-4 rounded-2xl xl:rounded-none xl:py-2 h-full">
         <div className="flex justify-between">
           <RadioGroup label={sort_label} value={sort} onValueChange={setSort}>
             {sort_method.map((method, i) => (

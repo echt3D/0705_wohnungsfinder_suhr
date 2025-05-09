@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <main className="w-screen h-desktop flex place-items-center place-content-center">
         <Sidebar />
-        <aside className="h-full w-desktop relative">
+        <aside className="h-full w-full xl:w-desktop relative">
           <Wohnungsfinder />
           <Navigation />
         </aside>
