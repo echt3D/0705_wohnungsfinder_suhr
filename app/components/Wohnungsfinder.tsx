@@ -109,7 +109,7 @@ const Wohnungsfinder = () => {
       case "reserviert":
         return "#FFA000";
       case "vermietet":
-        return "#535353";
+        return "#9D0000";
     }
   };
 

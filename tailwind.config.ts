@@ -26,7 +26,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#446470",
+        primary: "#567868",
         secondary: "#F8F6F3",
         tertiary: "#FF5D47",
         quaternary: "#638F7F",
@@ -34,7 +34,7 @@ export default {
         reserviert: "#CB7246",
         vermietet: "#687292",
         line: "#1E1E1E",
-        status_badge: "#446470",
+        status_badge: "#567868",
         text_primary: "#1E1E1E",
         text_secondary: "#FF5D47",
         text_tertiary: "#ffffff",

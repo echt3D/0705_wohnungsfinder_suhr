@@ -54,7 +54,10 @@ const ApartmentDetail = () => {
             <p className="text-md text-primary">{address}</p>
             <p>{clickedApartment.address}</p>
             <a
-              href=""
+              href={
+                clickedApartment.factsheet ? clickedApartment.factsheet : ""
+              }
+              target="_blank"
               className="w-full border-primary border-2 block text-center p-2 rounded-full text-primary hover:text-white hover:bg-primary duration-200"
             >
               {open_floorplan}
