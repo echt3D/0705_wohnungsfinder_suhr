@@ -1,6 +1,5 @@
-import { Apartment } from "../app/utils/types";
 
-export const rawApartments: Apartment[] = [
+export const rawApartments = [
   {
     apartmentId: "W11_001",
     address: "Baarermatte, 6340 Baar",
