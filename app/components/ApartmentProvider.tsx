@@ -29,6 +29,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   );
   const [showSVG, setShowSVG] = useState<boolean>(true);
 
+
   useEffect(() => {
     fetch("/api/get-all-apartments")
       .then((res) => res.json())
@@ -202,6 +203,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     setClickedApartment,
     showSVG,
     setShowSVG,
+   
   };
 
   return (

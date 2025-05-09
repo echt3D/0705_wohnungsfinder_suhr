@@ -108,7 +108,7 @@ const Wohnungsfinder = () => {
         return "#7CB342";
       case "reserviert":
         return "#FFA000";
-      case "gemietet":
+      case "vermietet":
         return "#535353";
     }
   };

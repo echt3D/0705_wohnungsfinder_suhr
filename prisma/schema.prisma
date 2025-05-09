@@ -42,4 +42,6 @@ model Apartment {
   deposit                Int?
   reduitArea            Int?
   referenceNumber        String?
+  description            String?
+  notes                  String?
 }

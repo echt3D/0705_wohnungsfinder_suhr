@@ -25,6 +25,8 @@ export interface Apartment {
   deposit: number | null;
   reduitArea: number | null;
   referenceNumber: string;
+  description: string | null;
+  notes: string | null;
 }
 
 export interface FilterType {

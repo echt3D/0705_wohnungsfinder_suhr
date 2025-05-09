@@ -25,7 +25,7 @@ const StatusSelect = ({ apartmentId, status }: StatusSelectProps) => {
   };
   return (
     <Select
-      radius="full"
+      aria-label="status"
       placeholder={`${status}`}
       classNames={{
         trigger: `bg-${updatedStatus}`,
