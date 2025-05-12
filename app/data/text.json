@@ -113,7 +113,14 @@
       },
       "apartment_status_block": {
         "title": "Wohnungsstatus",
-        "status_value": ["frei", "reserviert", "vermietet"]
+        "status_value": ["frei", "reserviert", "vermietet"],
+        "status_filter_options": [
+          { "building": "Alle Gebäude", "value": "all" },
+          { "building": "Gebäude 1", "value": "1" },
+          { "building": "Gebäude 2", "value": "2" },
+          { "building": "Gebäude 3", "value": "3" },
+          { "building": "Gebäude 4", "value": "4" }
+        ]
       },
       "apartment_details_block": {
         "title": "Details zu Wohnungen",

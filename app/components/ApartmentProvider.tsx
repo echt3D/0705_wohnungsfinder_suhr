@@ -131,6 +131,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     return filteredApartments;
   };
 
+
   const sortApartmentsByCategory = (apartments: Apartment[]) => {
     if (!sort) return apartments;
     if (isDescendent) {
