@@ -29,11 +29,17 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   );
   const [showSVG, setShowSVG] = useState<boolean>(true);
 
+  const getAllApartments = async () => {
+    const res = await fetch("/api/get-all-apartments");
+    const data = await res.json();
+    const sortedData = [...data.data].sort(
+      (apartmentA, apartmentB) => apartmentA.id - apartmentB.id
+    );
+    setApartments(sortedData);
+  };
 
   useEffect(() => {
-    fetch("/api/get-all-apartments")
-      .then((res) => res.json())
-      .then((data) => setApartments(data.data));
+    getAllApartments();
   }, []);
 
   useEffect(() => {
@@ -203,7 +209,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     setClickedApartment,
     showSVG,
     setShowSVG,
-   
+    getAllApartments,
   };
 
   return (

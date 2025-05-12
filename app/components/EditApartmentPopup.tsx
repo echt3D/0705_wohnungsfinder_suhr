@@ -4,9 +4,10 @@ import t from "../data/text.json";
 import Image from "next/image";
 import StatusSelect from "./StatusSelect";
 import { Input } from "@heroui/input";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button } from "@heroui/button";
 import { Form } from "@heroui/form";
+import { ApartmentContext } from "../utils/createContext";
 
 type EditApartmentPopupProps = {
   apartment: Apartment;
@@ -34,6 +35,7 @@ const EditApartmentPopup = ({
     notes: apartment.notes,
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { getAllApartments } = useContext(ApartmentContext);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -60,6 +62,7 @@ const EditApartmentPopup = ({
         if (data.status === 200) {
           setIsLoading(false);
           setEditApartment(false);
+          getAllApartments();
         }
       });
   };
