@@ -45,3 +45,9 @@ model Apartment {
   description            String?
   notes                  String?
 }
+
+model ProjectStatus {
+  id                    Int  @id @default(autoincrement())
+  label                 String
+  isCompleted           Boolean       
+}

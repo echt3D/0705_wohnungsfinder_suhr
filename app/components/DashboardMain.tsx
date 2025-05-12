@@ -1,5 +1,6 @@
 import t from "../data/text.json";
 import DashboardCircles from "./DashboardCircles";
+// import ProjectStatus from "./ProjectStatus";
 
 const DashboardMain = () => {
   const { project_name } = t;
@@ -16,6 +17,7 @@ const DashboardMain = () => {
         </h1>
       </div>
       <DashboardCircles />
+      {/* <ProjectStatus /> */}
     </section>
   );
 };
