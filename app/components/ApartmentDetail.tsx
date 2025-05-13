@@ -21,6 +21,7 @@ const ApartmentDetail = () => {
     rooms,
     apply,
     virtual_tour,
+    video,
   } = t.details;
 
   return (
@@ -72,6 +73,13 @@ const ApartmentDetail = () => {
                 {virtual_tour}
               </a>
             )}
+            <a
+              href={"/video"}
+              target="_blank"
+              className="w-full border-primary border-2 block text-center p-2 rounded-full text-primary hover:text-white hover:bg-primary duration-200"
+            >
+              {video}
+            </a>
           </div>
           <div className="w-full flex flex-col gap-2">
             <p className="text-md text-primary">{data}</p>
