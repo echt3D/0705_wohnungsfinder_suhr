@@ -14,7 +14,7 @@ const Navigation = () => {
   return (
     <div className="absolute bottom-44 xl:bottom-8 right-16 flex flex-row gap-2 z-30">
       <button
-        className="w-12 h-12 rounded-full bg-white flex place-items-center place-content-center "
+        className="w-12 h-12 rounded-full bg-white flex place-items-center place-content-center cursor-pointer"
         onClick={() => switchRight()}
       >
         <Image
@@ -25,7 +25,7 @@ const Navigation = () => {
         />
       </button>
       <button
-        className="w-12 h-12 rounded-full bg-white flex place-items-center place-content-center"
+        className="w-12 h-12 rounded-full bg-white flex place-items-center place-content-center cursor-pointer"
         onClick={() => switchLeft()}
       >
         <Image

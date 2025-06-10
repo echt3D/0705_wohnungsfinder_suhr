@@ -24,7 +24,7 @@
 //     <section className="max-w-desktop mx-auto w-full">
 //       <div className="w-full relative">
 //         {/* {projectStatus && projectStatus.map(status => )} */}
-//         <div className="bg-white w-full h-[1px]"></div>
+//         <div className="bg-white w-full h-px"></div>
 //       </div>
 //     </section>
 //   );

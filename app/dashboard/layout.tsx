@@ -22,7 +22,7 @@ const Layout = ({
           setNavIsClicked={setNavIsClicked}
         />
         <aside
-          className={`absolute min-h-desktop left-dashboard_sidebar_width top-dashboard_header_height w-dashboard_closed_desktop overflow-scroll  `}
+          className={`absolute min-h-height_desktop left-dashboard_sidebar_width top-dashboard_header_height w-dashboard_closed_desktop overflow-scroll`}
         >
           {children}
           <DashboardFooter />

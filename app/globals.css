@@ -1,6 +1,68 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin '../hero.ts';
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+
+@theme {
+  /* Colors */
+  --color-primary: #567868;
+  --color-secondary: #f8f6f3;
+  --color-tertiary: #ff5d47;
+  --color-quaternary: #638f7f;
+  --color-frei: #d14600;
+  --color-reserviert: #cb7246;
+  --color-vermietet: #687292;
+  --color-line: #1e1e1e;
+  --color-status_badge: #567868;
+  --color-text_primary: #1e1e1e;
+  --color-text_secondary: #ff5d47;
+  --color-text_tertiary: #ffffff;
+  --color-like: #ff5d47;
+  --color-dashboard_primary: #001d3d;
+  --color-dashboard_secondary: #d14600;
+  --color-dashboard_tertiary: #e7e2e0;
+
+  --spacing-sidebar_desktop: 375px;
+  --spacing-width_desktop: calc(100vw - 375px);
+  --spacing-height_desktop: calc(100vh - 100px);
+  --spacing-option_switch: 100px;
+  --spacing-dashboard_sidebar_closed_desktop: 100px;
+  --spacing-dashboard_sidebar_open_desktop: 240px;
+  --spacing-dashboard_closed_desktop: calc(100vw - 100px);
+  --spacing-dashboard_open_desktop: calc(100vw - 240px);
+
+  --spacing-header_desktop: 100px;
+  --spacing-filter_button_desktop: 56px;
+  --spacing-filter_desktop: calc(100vh - 100px - 64px);
+  --spacing-filter_top_desktop: 62px
+
+  --font-family-neue-kabel: "neue-kabel", sans-serif;
+
+  --text-sm: 12px;
+  --text-md: 14px;
+  --text-h1-desktop: 47px;
+  --text-h2-desktop: 40px;
+  --text-h3-desktop: 33px;
+  --text-h4-desktop: 25px;
+  --text-h5-desktop: 23px;
+  --text-body-desktop: 16px;
+  --text-body-small-desktop: 12px;
+
+  --inset-filter-desktop: 62px;
+  --inset-dashboard-sidebar-width: 100px;
+
+  --box-shadow-custom-sidebar: 5px 0px 12px 0px rgba(0, 0, 0, 0.2);
+  --box-shadow-custom: 1px 1px 4px 4px rgba(0, 0, 0, 0.1);
+}
 
 .red {
   border: red solid 2px;
@@ -13,5 +75,3 @@
 .green {
   border: green solid 2px;
 }
-
-

@@ -37,6 +37,7 @@ const Wohnungsfinder = () => {
   } = useContext(ApartmentContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+
   useLayoutEffect(() => {
     const updateContainerSize = () => {
       if (containerRef.current) {
@@ -64,6 +65,8 @@ const Wohnungsfinder = () => {
   const heightScale = containerSize.height / bounds.height;
   const widthScale = containerSize.width / bounds.width;
   const scaleRatio = Math.max(heightScale, widthScale);
+
+  console.log("container size", containerSize);
 
   const svgPathsArr = () => {
     const apartmentSVG = Object.entries(
@@ -119,7 +122,7 @@ const Wohnungsfinder = () => {
   };
 
   if (containerSize.width === 0 || containerSize.height === 0) {
-    return <div ref={containerRef} className="w-full h-desktop" />;
+    return <div ref={containerRef} className="w-full h-full" />;
   }
   return (
     <div ref={containerRef} className="h-full w-full">

@@ -76,7 +76,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
     (filter[name as keyof FilterType] as string[]).includes(value);
 
   return (
-    <div className="w-full xl:h-filter_desktop  fixed bottom-0  xl:absolute  xl:top-filter_desktop px-6 pt-2 left-0 z-20">
+    <div className="w-full xl:h-filter_desktop  fixed bottom-0  xl:absolute  xl:top-filter_top_desktop px-6 pt-2 left-0 z-20 bg-secondary">
       <div className="flex flex-col gap-8 bg-white px-4 py-4 rounded-2xl xl:rounded-none xl:py-2 h-full">
         <div className="flex justify-between">
           <RadioGroup label={sort_label} value={sort} onValueChange={setSort}>
@@ -177,7 +177,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
         </section>
         <section className="flex flex-col gap-2 mt-auto">
           <button
-            className="text-md font-semibold text-tertiary hover:opacity-80 duration-200"
+            className="text-md font-semibold text-tertiary hover:opacity-80 duration-200 cursor-pointer"
             onClick={() => {
               setSort(null);
               setActivateLikedApartments(false);
@@ -191,7 +191,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
             {reset_filter}
           </button>
           <button
-            className="bg-primary text-white px-2 py-4 font-medium hover:opacity-80 duration-200"
+            className="bg-primary text-white px-2 py-4 font-medium hover:opacity-80 duration-200 cursor-pointer"
             onClick={() => setOpenFilter(false)}
           >{`${show_results} (${
             filterTargetApartments(apartments).length

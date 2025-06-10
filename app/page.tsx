@@ -8,9 +8,9 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="w-screen h-desktop flex place-items-center place-content-center">
+      <main className="w-screen h-height_desktop flex place-items-center place-content-center">
         <Sidebar />
-        <aside className="h-full w-full xl:w-desktop relative">
+        <aside className="h-full w-full xl:w-width_desktop relative">
           <Wohnungsfinder />
           <Navigation />
         </aside>
