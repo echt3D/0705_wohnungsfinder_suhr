@@ -66,7 +66,6 @@ const Wohnungsfinder = () => {
   const widthScale = containerSize.width / bounds.width;
   const scaleRatio = Math.max(heightScale, widthScale);
 
-  console.log("container size", containerSize);
 
   const svgPathsArr = () => {
     const apartmentSVG = Object.entries(

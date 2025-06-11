@@ -17,7 +17,7 @@ const Option = () => {
           className="flex place-items-center place-content-center gap-2 "
           onClick={() => setOpenOption(!openOption)}
         >
-          <div className="border-4 rounded-full p-2">
+          <div className="border-4 rounded-full p-2 border-gray-300">
             <Image
               src="/icons/option.svg"
               width={24}
