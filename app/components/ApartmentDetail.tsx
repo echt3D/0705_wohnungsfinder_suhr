@@ -21,7 +21,6 @@ const ApartmentDetail = () => {
     rooms,
     apply,
     virtual_tour,
-    video,
   } = t.details;
 
   return (
@@ -43,51 +42,44 @@ const ApartmentDetail = () => {
               <span>{back}</span>
             </button>
             <div className="flex gap-2 items-center">
-              <StatusBatch status={clickedApartment.state} />
-              <LikeButton apartment={clickedApartment.name} />
+              <StatusBatch status={clickedApartment.object_state_text} />
+              <LikeButton apartment={clickedApartment.title} />
             </div>
           </div>
           <div>
             <p className="text-2xl font-medium text-primary">
-              {apartment} {clickedApartment.name}
+              {apartment} {clickedApartment.title}
             </p>
           </div>
           <div className="w-full flex flex-col gap-2">
             <p className="text-md text-primary">{address}</p>
-            <p>{clickedApartment.address}</p>
-            {clickedApartment.factsheet && (
+            <p>{`${clickedApartment.building.address}, ${clickedApartment.building.postal_code} ${clickedApartment.building.city}`}</p>
+            {clickedApartment.factsheets && (
               <a
-                href={clickedApartment.factsheet}
+                href={clickedApartment.factsheets}
                 target="_blank"
                 className="w-full border-primary border-2 block text-center p-2 rounded-full text-primary hover:text-white hover:bg-primary duration-200"
               >
                 {open_floorplan}
               </a>
             )}
-            {clickedApartment.virtualTourLink && (
+            {clickedApartment.virtual_tour_link && (
               <a
-                href={clickedApartment.virtualTourLink}
+                href={clickedApartment.virtual_tour_link}
                 target="_blank"
                 className="w-full border-primary border-2 block text-center p-2 rounded-full text-primary hover:text-white hover:bg-primary duration-200"
               >
                 {virtual_tour}
               </a>
             )}
-            <a
-              href={"/video"}
-              target="_blank"
-              className="w-full border-primary border-2 block text-center p-2 rounded-full text-primary hover:text-white hover:bg-primary duration-200"
-            >
-              {video}
-            </a>
           </div>
           <div className="w-full flex flex-col gap-2">
             <p className="text-md text-primary">{data}</p>
             <span>
               {move_in_date}{" "}
               {`${
-                clickedApartment.moveInDate
-                  ? clickedApartment.moveInDate
+                clickedApartment.move_in_date
+                  ? clickedApartment.move_in_date
                   : "---"
               }`}
             </span>
@@ -132,9 +124,10 @@ const ApartmentDetail = () => {
             </div>
           </div>
           <Link
-            href=""
+            href={clickedApartment.application_form}
+            target="_blank"
             className={`mt-auto w-full bg-primary text-white p-2 text-center rounded-xl duration-200 ${
-              clickedApartment.state === "frei"
+              clickedApartment.object_state_text === "Frei"
                 ? "hover:opacity-70 pointer-events-auto"
                 : "opacity-70 pointer-events-none"
             }`}

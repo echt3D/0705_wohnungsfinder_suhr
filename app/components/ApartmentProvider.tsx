@@ -42,20 +42,31 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     // const sortedData = [...data.data].sort(
     //   (apartmentA, apartmentB) => apartmentA.id - apartmentB.id
     // );
+    setRentalApartments(data);
+  };
 
+  const getAllSellingApartments = async () => {
+    const res = await fetch(
+      "http://altemuehleevm.api.melon.market/api/v2/objects/"
+    );
+    const data = await res.json();
+
+    // const sortedData = [...data.data].sort(
+    //   (apartmentA, apartmentB) => apartmentA.id - apartmentB.id
+    // );
     setRentalApartments(data);
   };
 
   useEffect(() => {
     getAllRentalApartments();
+    getAllSellingApartments();
   }, []);
-
-  console.log("rentalApartments", rentalApartments);
 
   useEffect(() => {
     if (rentalApartments && rentalApartments.length > 0) {
       const minMaxSpace = getMinMax("area");
       const minMaxRentalPrice = getMinMax("rentalgross");
+      console.log("minMaxRentalPrice", minMaxRentalPrice);
       setSpace(minMaxSpace);
       setRentalPrice(minMaxRentalPrice);
     }

@@ -42,7 +42,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
   } = t.filter;
 
   const spaceMinMax = getMinMax("area");
-  const rentalPriceMinMax = getMinMax("rentalPrice");
+  const rentalPriceMinMax = getMinMax("rentalgross");
 
   const createCheckboxes = (keyName: string): string[] => {
     const checkboxArr: string[] = [];
@@ -120,7 +120,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
             minValue={rentalPriceMinMax[0]}
             maxValue={rentalPriceMinMax[1]}
             size="md"
-            step={100}
+            step={1}
             hideThumb={false}
             onChange={setRentalPrice}
           />

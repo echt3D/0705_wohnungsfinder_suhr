@@ -73,7 +73,7 @@ const Wohnungsfinder = () => {
 
     const filteredApartmentIds = filterTargetrentalApartments(
       rentalApartments
-    ).map((apartment) => apartment.apartmentId);
+    ).map((apartment) => apartment.title);
 
     const filteredrentalApartments = rentalApartmentsVG.filter((aptSVG) => {
       const [apartmentId] = aptSVG;
@@ -88,7 +88,7 @@ const Wohnungsfinder = () => {
   const findApartmentByTitle = (apartmentTitle: string | null) =>
     (rentalApartments &&
       rentalApartments.find(
-        (apartment) => apartment.apartmentId === apartmentTitle
+        (apartment) => apartment.title === apartmentTitle
       )) ||
     null;
 
@@ -98,7 +98,7 @@ const Wohnungsfinder = () => {
   };
 
   const isHovered = (apartmentTitle: string | null) =>
-    apartmentTitle === hoveredApartment?.apartmentId;
+    apartmentTitle === hoveredApartment?.title;
 
   const isClicked = (apartmentTitle: string | null) =>
     clickedApartment && apartmentTitle === clickedApartment.title;

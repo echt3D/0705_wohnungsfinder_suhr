@@ -15,8 +15,11 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
         className="flex flex-col gap-2"
         onClick={() => setClickedApartment(apartment)}
       >
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <StatusBatch status={apartment.object_state_text} />
+          <div className="rounded-md  text-sm px-2 py-1 border-line border">{`${
+            apartment.rentalgross ? "zum Mieten" : "zum Kaufen"
+          }`}</div>
         </div>
         <div className="flex gap-2 text-sm">
           <span className="text-primary">{`Whg. ${apartment.title}`}</span>

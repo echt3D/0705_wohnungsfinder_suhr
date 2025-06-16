@@ -1,9 +1,11 @@
 import { createContext } from "react";
-import { Apartment, FilterType } from "./types";
+import { Apartment, SellingApartment, FilterType } from "./types";
 
 interface ApartmentContext {
   rentalApartments: Apartment[] | [];
   setRentalApartments: (rentalApartments: Apartment[] | []) => void;
+  sellingApartments: SellingApartment[] | [];
+  setSellingApartments: (sellingApartments: SellingApartment[] | []) => void;
   hoveredApartment: Apartment | null;
   setHoveredApartment: (hoveredApartment: Apartment | null) => void;
   getMinMax: (category: string) => number[];
@@ -35,6 +37,8 @@ interface ApartmentContext {
 
 export const ApartmentContext = createContext<ApartmentContext>({
   rentalApartments: [],
+  sellingApartments: [],
+  setSellingApartments: () => {},
   setRentalApartments: () => {},
   hoveredApartment: null,
   setHoveredApartment: () => {},
