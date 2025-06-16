@@ -13,7 +13,7 @@ type FilterProps = {
 
 const Filter = ({ setOpenFilter }: FilterProps) => {
   const {
-    apartments,
+    rentalApartments,
     space,
     setSpace,
     getMinMax,
@@ -21,9 +21,9 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
     setRentalPrice,
     filter,
     setFilter,
-    filterTargetApartments,
-    activateLikedApartments,
-    setActivateLikedApartments,
+    filterTargetrentalApartments,
+    activateLikedrentalApartments,
+    setActivateLikedrentalApartments,
     isDescendent,
     setIsDescendent,
     sort,
@@ -47,7 +47,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
   const createCheckboxes = (keyName: string): string[] => {
     const checkboxArr: string[] = [];
 
-    for (const apartment of apartments) {
+    for (const apartment of rentalApartments) {
       if (apartment.hasOwnProperty(keyName)) {
         const value = String(apartment[keyName as keyof Apartment]);
         if (!checkboxArr.includes(value)) {
@@ -167,9 +167,9 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
             {only_available}
           </Checkbox>
           <Checkbox
-            isSelected={activateLikedApartments}
+            isSelected={activateLikedrentalApartments}
             onChange={() =>
-              setActivateLikedApartments(!activateLikedApartments)
+              setActivateLikedrentalApartments(!activateLikedrentalApartments)
             }
           >
             {only_liked}
@@ -180,7 +180,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
             className="text-md font-semibold text-tertiary hover:opacity-80 duration-200 cursor-pointer"
             onClick={() => {
               setSort(null);
-              setActivateLikedApartments(false);
+              setActivateLikedrentalApartments(false);
               setFilter({
                 floor: [],
                 rooms: [],
@@ -194,7 +194,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
             className="bg-primary text-white px-2 py-4 font-medium hover:opacity-80 duration-200 cursor-pointer"
             onClick={() => setOpenFilter(false)}
           >{`${show_results} (${
-            filterTargetApartments(apartments).length
+            filterTargetrentalApartments(rentalApartments).length
           })`}</button>
         </section>
       </div>

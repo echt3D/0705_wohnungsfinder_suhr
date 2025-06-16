@@ -2,8 +2,8 @@ import { createContext } from "react";
 import { Apartment, FilterType } from "./types";
 
 interface ApartmentContext {
-  apartments: Apartment[] | [];
-  setApartments: (apartments: Apartment[] | []) => void;
+  rentalApartments: Apartment[] | [];
+  setRentalApartments: (rentalApartments: Apartment[] | []) => void;
   hoveredApartment: Apartment | null;
   setHoveredApartment: (hoveredApartment: Apartment | null) => void;
   getMinMax: (category: string) => number[];
@@ -15,11 +15,13 @@ interface ApartmentContext {
   setRentalPrice: (rentalPrice: number[] | number) => void;
   filter: FilterType;
   setFilter: (filter: FilterType) => void;
-  filterTargetApartments: (apartments: Apartment[]) => Apartment[];
-  handleLikedApartments: (apartment: string) => void;
+  filterTargetrentalApartments: (rentalApartments: Apartment[]) => Apartment[];
+  handleLikedRentalApartments: (apartment: string) => void;
   isLikedApartment: (apartment: string) => boolean;
-  activateLikedApartments: boolean;
-  setActivateLikedApartments: (activateLikedApartments: boolean) => void;
+  activateLikedrentalApartments: boolean;
+  setActivateLikedrentalApartments: (
+    activateLikedrentalApartments: boolean
+  ) => void;
   isDescendent: boolean;
   setIsDescendent: (isDescendent: boolean) => void;
   sort: string | null;
@@ -28,12 +30,12 @@ interface ApartmentContext {
   setClickedApartment: (clickedApartment: Apartment | null) => void;
   showSVG: boolean;
   setShowSVG: (showSVG: boolean) => void;
-  getAllApartments: () => void;
+  getAllRentalApartments: () => void;
 }
 
 export const ApartmentContext = createContext<ApartmentContext>({
-  apartments: [],
-  setApartments: () => {},
+  rentalApartments: [],
+  setRentalApartments: () => {},
   hoveredApartment: null,
   setHoveredApartment: () => {},
   getMinMax: () => [0, 0],
@@ -45,11 +47,11 @@ export const ApartmentContext = createContext<ApartmentContext>({
   setRentalPrice: () => {},
   filter: { floor: [], rooms: [], state: [] },
   setFilter: () => {},
-  filterTargetApartments: () => [],
-  handleLikedApartments: () => {},
+  filterTargetrentalApartments: () => [],
+  handleLikedRentalApartments: () => {},
   isLikedApartment: () => false,
-  activateLikedApartments: false,
-  setActivateLikedApartments: () => {},
+  activateLikedrentalApartments: false,
+  setActivateLikedrentalApartments: () => {},
   isDescendent: false,
   setIsDescendent: () => {},
   sort: null,
@@ -58,5 +60,5 @@ export const ApartmentContext = createContext<ApartmentContext>({
   setClickedApartment: () => {},
   showSVG: false,
   setShowSVG: () => {},
-  getAllApartments: () => {},
+  getAllRentalApartments: () => {},
 });

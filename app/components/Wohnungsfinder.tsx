@@ -26,14 +26,14 @@ const preloadImage = (src: string) => {
 
 const Wohnungsfinder = () => {
   const {
-    apartments,
+    rentalApartments,
     hoveredApartment,
     setHoveredApartment,
     visu,
     showSVG,
     clickedApartment,
     setClickedApartment,
-    filterTargetApartments,
+    filterTargetrentalApartments,
   } = useContext(ApartmentContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
@@ -66,29 +66,28 @@ const Wohnungsfinder = () => {
   const widthScale = containerSize.width / bounds.width;
   const scaleRatio = Math.max(heightScale, widthScale);
 
-
   const svgPathsArr = () => {
-    const apartmentSVG = Object.entries(
+    const rentalApartmentsVG = Object.entries(
       svgData[visu?.toString() as keyof typeof svgData]
     );
 
-    const filteredApartmentIds = filterTargetApartments(apartments).map(
-      (apartment) => apartment.apartmentId
-    );
+    const filteredApartmentIds = filterTargetrentalApartments(
+      rentalApartments
+    ).map((apartment) => apartment.apartmentId);
 
-    const filteredApartments = apartmentSVG.filter((aptSVG) => {
+    const filteredrentalApartments = rentalApartmentsVG.filter((aptSVG) => {
       const [apartmentId] = aptSVG;
       return filteredApartmentIds.includes(apartmentId);
     });
 
-    return filteredApartments;
+    return filteredrentalApartments;
   };
 
   const strToNum = (points: string[]) => points.map((point) => Number(point));
 
   const findApartmentByTitle = (apartmentTitle: string | null) =>
-    (apartments &&
-      apartments.find(
+    (rentalApartments &&
+      rentalApartments.find(
         (apartment) => apartment.apartmentId === apartmentTitle
       )) ||
     null;
@@ -104,13 +103,13 @@ const Wohnungsfinder = () => {
   const isClicked = (apartmentTitle: string | null) =>
     clickedApartment && apartmentTitle === clickedApartment.title;
 
-  const getColorByStatus = (apartmentStatus: string | undefined) => {
-    switch (apartmentStatus) {
-      case "frei":
+  const getColorByStatus = (rentalApartmentstatus: string | undefined) => {
+    switch (rentalApartmentstatus) {
+      case "Frei":
         return "#7CB342";
-      case "reserviert":
+      case "Reserviert":
         return "#FFA000";
-      case "vermietet":
+      case "Vermietet":
         return "#9D0000";
     }
   };
@@ -173,7 +172,9 @@ const Wohnungsfinder = () => {
                   strokeWidth={4}
                   stroke="white"
                   closed={true}
-                  fill={getColorByStatus(findApartmentByTitle(point[0])?.state)}
+                  fill={getColorByStatus(
+                    findApartmentByTitle(point[0])?.object_state_text
+                  )}
                   opacity={isHovered(point[0]) ? 0.8 : 0.4}
                 />
               ) : (
@@ -188,7 +189,9 @@ const Wohnungsfinder = () => {
                   }
                   fill={
                     isHovered(point[0]) || isClicked(point[0])
-                      ? getColorByStatus(findApartmentByTitle(point[0])?.state)
+                      ? getColorByStatus(
+                          findApartmentByTitle(point[0])?.object_state_text
+                        )
                       : "transparent"
                   }
                   opacity={0.8}

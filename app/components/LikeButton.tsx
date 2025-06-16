@@ -6,11 +6,11 @@ type LikeButtonProps = {
 };
 
 const LikeButton = ({ apartment }: LikeButtonProps) => {
-  const { handleLikedApartments, isLikedApartment } =
+  const { handleLikedrentalApartments, isLikedApartment } =
     useContext(ApartmentContext);
   return (
     <div
-      onClick={() => handleLikedApartments(apartment)}
+      onClick={() => handleLikedrentalApartments(apartment)}
       className={`w-8 h-8 p-1 xl:w-10 xl:h-10 flex place-items-center place-content-center border-2 hover:opacity-70  ${
         isLikedApartment(apartment) ? "border-[#FF5D47]" : "border-secondary"
       } rounded-full cursor-pointer`}

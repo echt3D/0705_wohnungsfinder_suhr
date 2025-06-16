@@ -4,8 +4,8 @@ const dbClient = new PrismaClient();
 
 export const GET = async () => {
   try {
-    const allApartments = await dbClient.apartment.findMany();
-    return NextResponse.json({ data: allApartments, status: 200 });
+    const allrentalApartments = await dbClient.apartment.findMany();
+    return NextResponse.json({ data: allrentalApartments, status: 200 });
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);

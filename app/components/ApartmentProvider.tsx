@@ -11,7 +11,9 @@ const initFilter = {
 };
 
 const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
-  const [apartments, setApartments] = useState<Apartment[] | []>([]);
+  const [rentalApartments, setRentalApartments] = useState<Apartment[] | []>(
+    []
+  );
   const [hoveredApartment, setHoveredApartment] = useState<Apartment | null>(
     null
   );
@@ -19,8 +21,10 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [space, setSpace] = useState<number[] | number>([0, 0]);
   const [rentalPrice, setRentalPrice] = useState<number[] | number>([0, 0]);
   const [filter, setFilter] = useState<FilterType>(initFilter);
-  const [likedApartments, setLikedApartments] = useState<string[]>([]);
-  const [activateLikedApartments, setActivateLikedApartments] =
+  const [likedRentalApartments, setLikedRentalApartments] = useState<string[]>(
+    []
+  );
+  const [activateLikedrentalApartments, setActivateLikedrentalApartments] =
     useState<boolean>(false);
   const [isDescendent, setIsDescendent] = useState<boolean>(true);
   const [sort, setSort] = useState<string | null>(null);
@@ -29,42 +33,39 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   );
   const [showSVG, setShowSVG] = useState<boolean>(true);
 
-  const getAllApartments = async () => {
+  const getAllRentalApartments = async () => {
     const res = await fetch(
       "http://altemuehleevm.api.melon.market/api/v2/objects/"
     );
     const data = await res.json();
-    const resTwo = await fetch(
-      "http://altemuehle.api.melon.sale/api/v2/objects/"
-    );
-    const dataTwo = await resTwo.json();
+
     // const sortedData = [...data.data].sort(
     //   (apartmentA, apartmentB) => apartmentA.id - apartmentB.id
     // );
 
-    setApartments([...data, ...dataTwo]);
+    setRentalApartments(data);
   };
 
   useEffect(() => {
-    getAllApartments();
+    getAllRentalApartments();
   }, []);
 
-  console.log("apartments", apartments);
+  console.log("rentalApartments", rentalApartments);
 
   useEffect(() => {
-    if (apartments && apartments.length > 0) {
+    if (rentalApartments && rentalApartments.length > 0) {
       const minMaxSpace = getMinMax("area");
-      const minMaxRentalPrice = getMinMax("rentalPrice");
+      const minMaxRentalPrice = getMinMax("rentalgross");
       setSpace(minMaxSpace);
       setRentalPrice(minMaxRentalPrice);
     }
-  }, [apartments]);
+  }, [rentalApartments]);
 
   const getMinMax = (category: string): number[] => {
-    if (!apartments || apartments.length === 0) {
+    if (!rentalApartments || rentalApartments.length === 0) {
       return [0, 0];
     }
-    const sortedApartments = [...(apartments || [])].sort(
+    const sortedRentalApartments = [...(rentalApartments || [])].sort(
       (apartment1: Apartment, apartment2: Apartment) => {
         const valueA = Number(apartment1[category as keyof Apartment]) || 0;
         const valueB = Number(apartment2[category as keyof Apartment]) || 0;
@@ -72,101 +73,107 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
       }
     );
 
-    const min = sortedApartments?.[0][category as keyof Apartment] as number;
-    const max = sortedApartments?.[sortedApartments.length - 1][
+    const min = sortedRentalApartments?.[0][
+      category as keyof Apartment
+    ] as number;
+    const max = sortedRentalApartments?.[sortedRentalApartments.length - 1][
       category as keyof Apartment
     ] as number;
     return [min, max];
   };
 
-  const handleLikedApartments = useCallback(
+  const handleLikedRentalApartments = useCallback(
     (apartment: string) => {
-      if (likedApartments.includes(apartment)) {
-        const updated = likedApartments.filter((id) => id !== apartment);
-        setLikedApartments(updated);
-        localStorage.setItem("likedApartments", JSON.stringify(updated));
+      if (likedRentalApartments.includes(apartment)) {
+        const updated = likedRentalApartments.filter((id) => id !== apartment);
+        setLikedRentalApartments(updated);
+        localStorage.setItem("likedRentalApartments", JSON.stringify(updated));
       } else {
-        const updated = [...likedApartments, apartment];
-        setLikedApartments(updated);
-        localStorage.setItem("likedApartments", JSON.stringify(updated));
+        const updated = [...likedRentalApartments, apartment];
+        setLikedRentalApartments(updated);
+        localStorage.setItem("likedRentalApartments", JSON.stringify(updated));
       }
     },
-    [likedApartments]
+    [likedRentalApartments]
   );
 
   const isLikedApartment = (apartment: string) =>
-    likedApartments.includes(apartment);
+    likedRentalApartments.includes(apartment);
 
   useEffect(() => {
-    const storedLikedApartments = localStorage.getItem("likedApartments");
-    if (storedLikedApartments)
-      setLikedApartments(JSON.parse(storedLikedApartments));
+    const storedLikedrentalApartments = localStorage.getItem(
+      "likedRentalApartments"
+    );
+    if (storedLikedrentalApartments)
+      setLikedRentalApartments(JSON.parse(storedLikedrentalApartments));
   }, []);
 
   const filterByCheckbox = (
-    apartments: Apartment[],
+    rentalApartments: Apartment[],
     category: keyof FilterType
   ) => {
     const currentFilter = filter[category] as string[];
     if (currentFilter.length) {
-      return apartments.filter((apartment) => {
+      return rentalApartments.filter((apartment) => {
         const value = String(apartment[category as keyof Apartment]);
         return currentFilter.includes(value);
       });
     } else {
-      return apartments;
+      return rentalApartments;
     }
   };
 
-  const filterByLikes = (apartments: Apartment[]) => {
-    if (!likedApartments.length) return apartments;
-    const filteredApartments = apartments.filter((apartment: Apartment) => {
-      if (likedApartments.includes(apartment.title)) return apartment;
-    });
-    return filteredApartments;
+  const filterByLikes = (rentalApartments: Apartment[]) => {
+    if (!likedRentalApartments.length) return rentalApartments;
+    const filteredrentalApartments = rentalApartments.filter(
+      (apartment: Apartment) => {
+        if (likedRentalApartments.includes(apartment.title)) return apartment;
+      }
+    );
+    return filteredrentalApartments;
   };
 
   const filterByRange = (
-    apartments: Apartment[],
+    rentalApartments: Apartment[],
     category: keyof Apartment,
     min: number,
     max: number
   ) => {
-    const filteredApartments = apartments.filter((apartment) => {
+    const filteredrentalApartments = rentalApartments.filter((apartment) => {
       return (
         Number(apartment[category]) >= min && Number(apartment[category]) <= max
       );
     });
-    return filteredApartments;
+    return filteredrentalApartments;
   };
 
-  const sortApartmentsByCategory = (apartments: Apartment[]) => {
-    if (!sort) return apartments;
+  const sortrentalApartmentsByCategory = (rentalApartments: Apartment[]) => {
+    if (!sort) return rentalApartments;
     if (isDescendent) {
-      const sortedApartments = apartments.sort(
+      const sortedrentalApartments = rentalApartments.sort(
         (apartmentA, apartmentB) =>
           Number(apartmentA[sort as keyof Apartment]) -
           Number(apartmentB[sort as keyof Apartment])
       );
-      return sortedApartments;
+      return sortedrentalApartments;
     } else {
-      const sortedApartments = apartments.sort(
+      const sortedrentalApartments = rentalApartments.sort(
         (apartmentA, apartmentB) =>
           Number(apartmentB[sort as keyof Apartment]) -
           Number(apartmentA[sort as keyof Apartment])
       );
-      return sortedApartments;
+      return sortedrentalApartments;
     }
   };
 
-  const filterTargetApartments = (apartments: Apartment[]) => {
-    const apartmentsCopy = [...apartments];
+  const filterTargetrentalApartments = (rentalApartments: Apartment[]) => {
+    const rentalApartmentsCopy = [...rentalApartments];
     const spaceMinMax = space as number[];
     const rentalPriceMinMax = rentalPrice as number[];
-    let targetApartments: Apartment[];
+    let targetrentalApartments: Apartment[];
 
     const filteredBySpace = filterByRange(
-      apartmentsCopy,
+      rentalApartmentsCopy,
       "area",
       spaceMinMax[0],
       spaceMinMax[1]
@@ -174,7 +181,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
 
     const filteredByrentalPrice = filterByRange(
       filteredBySpace,
-      "rentalPrice",
+      "rentalgross",
       rentalPriceMinMax[0],
       rentalPriceMinMax[1]
     );
@@ -182,18 +189,18 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     const filteredByFloor = filterByCheckbox(filteredByrentalPrice, "floor");
     const filteredByRooms = filterByCheckbox(filteredByFloor, "rooms");
     const filteredByStatus = filterByCheckbox(filteredByRooms, "state");
-    if (activateLikedApartments) {
-      targetApartments = filterByLikes(filteredByStatus);
+    if (activateLikedrentalApartments) {
+      targetrentalApartments = filterByLikes(filteredByStatus);
     } else {
-      targetApartments = filteredByStatus;
+      targetrentalApartments = filteredByStatus;
     }
 
-    return sortApartmentsByCategory(targetApartments);
+    return sortrentalApartmentsByCategory(targetrentalApartments);
   };
 
   const value = {
-    apartments,
-    setApartments,
+    rentalApartments,
+    setRentalApartments,
     hoveredApartment,
     setHoveredApartment,
     getMinMax,
@@ -205,11 +212,11 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     setRentalPrice,
     filter,
     setFilter,
-    filterTargetApartments,
-    handleLikedApartments,
+    filterTargetrentalApartments,
+    handleLikedRentalApartments,
     isLikedApartment,
-    activateLikedApartments,
-    setActivateLikedApartments,
+    activateLikedrentalApartments,
+    setActivateLikedrentalApartments,
     isDescendent,
     setIsDescendent,
     sort,
@@ -218,7 +225,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     setClickedApartment,
     showSVG,
     setShowSVG,
-    getAllApartments,
+    getAllRentalApartments,
   };
 
   return (

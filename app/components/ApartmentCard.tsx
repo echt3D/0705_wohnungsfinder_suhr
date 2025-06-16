@@ -16,10 +16,10 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
         onClick={() => setClickedApartment(apartment)}
       >
         <div className="flex items-center">
-          <StatusBatch status={apartment.state} />
+          <StatusBatch status={apartment.object_state_text} />
         </div>
         <div className="flex gap-2 text-sm">
-          <span className="text-primary">{`Whg. ${apartment.name}`}</span>
+          <span className="text-primary">{`Whg. ${apartment.title}`}</span>
           <span>{`${apartment.area} m²`}</span>
           <span>{apartment.floor}</span>
         </div>
@@ -29,7 +29,7 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
           style: "currency",
           currency: "CHF",
           maximumSignificantDigits: 3,
-        }).format(apartment.rentalPrice)} p.M.`}</p>
+        }).format(apartment.rentalgross)} p.M.`}</p>
       </div>
     </>
   );

@@ -9,8 +9,8 @@ import ApartmentDetail from "./ApartmentDetail";
 const Sidebar = () => {
   const [openFilter, setOpenFilter] = useState<boolean>(false);
   const {
-    apartments,
-    filterTargetApartments,
+    rentalApartments,
+    filterTargetrentalApartments,
     clickedApartment,
     setHoveredApartment,
   } = useContext(ApartmentContext);
@@ -22,16 +22,18 @@ const Sidebar = () => {
 
       <div className="overflow-scroll xl:h-filter_desktop">
         <ul className="flex flex-row xl:flex-col gap-8 py-2 w-[120vw] xl:w-full">
-          {apartments &&
-            filterTargetApartments(apartments).map((apartment, i) => (
-              <li
-                key={i}
-                className="px-2 py-4 shadow-md border rounded-lg bg-white hover:shadow-lg cursor-pointer relative min-w-[240px] grow "
-                onMouseEnter={() => setHoveredApartment(apartment)}
-              >
-                <ApartmentCard apartment={apartment} />
-              </li>
-            ))}
+          {rentalApartments &&
+            filterTargetrentalApartments(rentalApartments).map(
+              (apartment, i) => (
+                <li
+                  key={i}
+                  className="px-2 py-4 shadow-md border rounded-lg bg-white hover:shadow-lg cursor-pointer relative min-w-[240px] grow "
+                  onMouseEnter={() => setHoveredApartment(apartment)}
+                >
+                  <ApartmentCard apartment={apartment} />
+                </li>
+              )
+            )}
         </ul>
       </div>
     </aside>
