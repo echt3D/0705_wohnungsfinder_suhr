@@ -21,9 +21,11 @@ const ApartmentCard = ({
       >
         <div className="flex items-center gap-2">
           <StatusBatch status={apartment.object_state_text} />
-          <div className="rounded-md  text-sm px-2 py-1 border-line border">{`${
-            "rentalgross" in apartment ? "zum Mieten" : "zum Kaufen"
-          }`}</div>
+          <div className="rounded-md  text-sm px-2 py-1 border-line border">
+            <span>
+              {`${"rentalgross" in apartment ? "zum Mieten" : "zum Kaufen"}`}
+            </span>
+          </div>
         </div>
         <div className="flex gap-2 text-sm">
           <span className="text-primary">{`Whg. ${apartment.title}`}</span>

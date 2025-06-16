@@ -1,4 +1,6 @@
 import t from "../data/text.json";
+import { ApartmentContext } from "../utils/createContext";
+import { useContext } from "react";
 
 interface FilterButtonProps {
   openFilter: boolean;
@@ -7,9 +9,15 @@ interface FilterButtonProps {
 
 const FilterButton = ({ openFilter, setOpenFilter }: FilterButtonProps) => {
   const { sort_filter } = t.filter;
+  const { rentalApartments, setTargetApartments } =
+    useContext(ApartmentContext);
+
   return (
     <section
-      onClick={() => setOpenFilter(!openFilter)}
+      onClick={() => {
+        setOpenFilter(!openFilter);
+        setTargetApartments(rentalApartments);
+      }}
       className={`w-fit md:w-1/4 xl:w-full shadow-xl border bg-secondary rounded-lg flex justify-between items-center cursor-pointer p-4 text-text_primary h-filter_button_desktop
       }`}
     >

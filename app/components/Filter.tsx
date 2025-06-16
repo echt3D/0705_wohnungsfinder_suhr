@@ -3,7 +3,7 @@ import { RadioGroup, Radio } from "@heroui/react";
 import { Checkbox } from "@heroui/react";
 import { useContext } from "react";
 import { ApartmentContext } from "../utils/createContext";
-import { Apartment, FilterType } from "../utils/types";
+import { Apartment, SellingApartment, FilterType } from "../utils/types";
 import Image from "next/image";
 import t from "../data/text.json";
 
@@ -14,14 +14,19 @@ type FilterProps = {
 const Filter = ({ setOpenFilter }: FilterProps) => {
   const {
     rentalApartments,
+    sellingApartments,
+    targetApartments,
     rentalSpace,
     setRentalSpace,
+    sellingSpace,
+    setSellingSpace,
     getMinMax,
     rentalPrice,
     setRentalPrice,
+    sellingPrice,
+    setSellingPrice,
     filter,
     setFilter,
-    filterTargetApartments,
     activateLikedrentalApartments,
     setActivateLikedrentalApartments,
     isDescendent,
@@ -43,13 +48,17 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
 
   const rentalSpaceMinMax = getMinMax(rentalApartments, "area");
   const rentalPriceMinMax = getMinMax(rentalApartments, "rentalgross");
+  const sellingSpaceMinMax = getMinMax(sellingApartments, "area");
+  const sellingPriceMinMax = getMinMax(sellingApartments, "selling_price");
 
-  const createCheckboxes = (keyName: string): string[] => {
+  const createCheckboxes = (
+    keyName: keyof (Apartment | SellingApartment)
+  ): string[] => {
     const checkboxArr: string[] = [];
 
-    for (const apartment of rentalApartments) {
+    for (const apartment of targetApartments) {
       if (apartment.hasOwnProperty(keyName)) {
-        const value = String(apartment[keyName as keyof Apartment]);
+        const value = String(apartment[keyName]);
         if (!checkboxArr.includes(value)) {
           checkboxArr.push(value);
         }
@@ -74,6 +83,8 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
 
   const isChecked = (name: string, value: string) =>
     (filter[name as keyof FilterType] as string[]).includes(value);
+
+  const isRental = (): boolean => "rentalgross" in targetApartments[0];
 
   return (
     <div className="w-full xl:h-filter_desktop  fixed bottom-0  xl:absolute  xl:top-filter_top_desktop px-6 pt-2 left-0 z-20 bg-secondary">
@@ -106,23 +117,25 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
         <section className="flex flex-col gap-4">
           <Slider
             label="Fläche (m²)"
-            value={rentalSpace}
-            minValue={rentalSpaceMinMax[0]}
-            maxValue={rentalSpaceMinMax[1]}
+            value={isRental() ? rentalSpace : sellingSpace}
+            minValue={isRental() ? rentalSpaceMinMax[0] : sellingSpaceMinMax[0]}
+            maxValue={isRental() ? rentalSpaceMinMax[1] : sellingSpaceMinMax[1]}
             size="md"
             step={1}
             hideThumb={false}
-            onChange={setRentalSpace}
+            onChange={isRental() ? setRentalSpace : setSellingSpace}
           />
           <Slider
-            label="Bruttomiete (CHF)"
-            value={rentalPrice}
-            minValue={rentalPriceMinMax[0]}
-            maxValue={rentalPriceMinMax[1]}
+            label={`${
+              isRental() ? "Bruttomiete (CHF)" : "Verkaufspreis (CHF)"
+            }`}
+            value={isRental() ? rentalPrice : sellingPrice}
+            minValue={isRental() ? rentalPriceMinMax[0] : sellingPriceMinMax[0]}
+            maxValue={isRental() ? rentalPriceMinMax[1] : sellingPriceMinMax[1]}
             size="md"
             step={1}
             hideThumb={false}
-            onChange={setRentalPrice}
+            onChange={isRental() ? setRentalPrice : setSellingPrice}
           />
         </section>
         <section className="flex flex-col gap-2">
@@ -193,9 +206,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
           <button
             className="bg-primary text-white px-2 py-4 font-medium hover:opacity-80 duration-200 cursor-pointer"
             onClick={() => setOpenFilter(false)}
-          >{`${show_results} (${
-            filterTargetApartments(rentalApartments).length
-          })`}</button>
+          >{`${show_results} (${targetApartments.length})`}</button>
         </section>
       </div>
     </div>
