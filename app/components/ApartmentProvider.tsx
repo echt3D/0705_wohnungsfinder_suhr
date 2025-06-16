@@ -1,7 +1,7 @@
 "use client";
 import { ApartmentContext } from "../utils/createContext";
 import { useState, useEffect, useCallback } from "react";
-import { Apartment, FilterType } from "../utils/types";
+import { Apartment, SellingApartment, FilterType } from "../utils/types";
 
 const initFilter = {
   floor: [],
@@ -14,12 +14,20 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [rentalApartments, setRentalApartments] = useState<Apartment[] | []>(
     []
   );
-  const [hoveredApartment, setHoveredApartment] = useState<Apartment | null>(
-    null
-  );
+  const [sellingApartments, setSellingApartments] = useState<
+    SellingApartment[] | []
+  >([]);
+  const [targetApartments, setTargetApartments] = useState<
+    (Apartment | SellingApartment)[] | []
+  >([]);
+  const [hoveredApartment, setHoveredApartment] = useState<
+    Apartment | SellingApartment | null
+  >(null);
   const [visu, setVisu] = useState<number>(1002);
-  const [space, setSpace] = useState<number[] | number>([0, 0]);
+  const [rentalSpace, setRentalSpace] = useState<number[] | number>([0, 0]);
   const [rentalPrice, setRentalPrice] = useState<number[] | number>([0, 0]);
+  const [sellingSpace, setSellingSpace] = useState<number[] | number>([0, 0]);
+  const [sellingPrice, setSellingPrice] = useState<number[] | number>([0, 0]);
   const [filter, setFilter] = useState<FilterType>(initFilter);
   const [likedRentalApartments, setLikedRentalApartments] = useState<string[]>(
     []
@@ -28,9 +36,9 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     useState<boolean>(false);
   const [isDescendent, setIsDescendent] = useState<boolean>(true);
   const [sort, setSort] = useState<string | null>(null);
-  const [clickedApartment, setClickedApartment] = useState<Apartment | null>(
-    null
-  );
+  const [clickedApartment, setClickedApartment] = useState<
+    Apartment | SellingApartment | null
+  >(null);
   const [showSVG, setShowSVG] = useState<boolean>(true);
 
   const getAllRentalApartments = async () => {
@@ -46,15 +54,13 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const getAllSellingApartments = async () => {
-    const res = await fetch(
-      "http://altemuehleevm.api.melon.market/api/v2/objects/"
-    );
+    const res = await fetch("http://altemuehle.api.melon.sale/api/v2/objects/");
     const data = await res.json();
 
     // const sortedData = [...data.data].sort(
     //   (apartmentA, apartmentB) => apartmentA.id - apartmentB.id
     // );
-    setRentalApartments(data);
+    setSellingApartments(data);
   };
 
   useEffect(() => {
@@ -63,32 +69,56 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
+    setTargetApartments([...rentalApartments, ...sellingApartments]);
+  }, [rentalApartments, sellingApartments]);
+
+  useEffect(() => {
     if (rentalApartments && rentalApartments.length > 0) {
-      const minMaxSpace = getMinMax("area");
-      const minMaxRentalPrice = getMinMax("rentalgross");
-      console.log("minMaxRentalPrice", minMaxRentalPrice);
-      setSpace(minMaxSpace);
+      const minMaxRentalSpace = getMinMax(rentalApartments, "area");
+      const minMaxRentalPrice = getMinMax(rentalApartments, "rentalgross");
+      setRentalSpace(minMaxRentalSpace);
       setRentalPrice(minMaxRentalPrice);
     }
   }, [rentalApartments]);
 
-  const getMinMax = (category: string): number[] => {
-    if (!rentalApartments || rentalApartments.length === 0) {
+  useEffect(() => {
+    if (sellingApartments && sellingApartments.length > 0) {
+      const minMaxSellingSpace = getMinMax(sellingApartments, "area");
+      const minMaxSellingPrice = getMinMax(sellingApartments, "selling_price");
+      setSellingSpace(minMaxSellingSpace);
+      setSellingPrice(minMaxSellingPrice);
+    }
+  }, [sellingApartments]);
+
+  const getMinMax = (
+    apartments: (Apartment | SellingApartment)[],
+    category: string
+  ): number[] => {
+    if (!apartments || apartments.length === 0) {
       return [0, 0];
     }
-    const sortedRentalApartments = [...(rentalApartments || [])].sort(
-      (apartment1: Apartment, apartment2: Apartment) => {
-        const valueA = Number(apartment1[category as keyof Apartment]) || 0;
-        const valueB = Number(apartment2[category as keyof Apartment]) || 0;
+    const sortedApartments = [...(apartments || [])].sort(
+      (
+        apartment1: Apartment | SellingApartment,
+        apartment2: Apartment | SellingApartment
+      ) => {
+        const valueA =
+          Number(
+            apartment1[category as keyof (Apartment | SellingApartment)]
+          ) || 0;
+        const valueB =
+          Number(
+            apartment2[category as keyof (Apartment | SellingApartment)]
+          ) || 0;
         return valueA - valueB;
       }
     );
 
-    const min = sortedRentalApartments?.[0][
-      category as keyof Apartment
+    const min = sortedApartments?.[0][
+      category as keyof (Apartment | SellingApartment)
     ] as number;
-    const max = sortedRentalApartments?.[sortedRentalApartments.length - 1][
-      category as keyof Apartment
+    const max = sortedApartments?.[sortedApartments.length - 1][
+      category as keyof (Apartment | SellingApartment)
     ] as number;
     return [min, max];
   };
@@ -177,21 +207,21 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const filterTargetrentalApartments = (rentalApartments: Apartment[]) => {
+  const filterTargetApartments = (rentalApartments: Apartment[]) => {
     const rentalApartmentsCopy = [...rentalApartments];
-    const spaceMinMax = space as number[];
+    const rentalSpaceMinMax = rentalSpace as number[];
     const rentalPriceMinMax = rentalPrice as number[];
     let targetrentalApartments: Apartment[];
 
-    const filteredBySpace = filterByRange(
+    const filteredByrentalSpace = filterByRange(
       rentalApartmentsCopy,
       "area",
-      spaceMinMax[0],
-      spaceMinMax[1]
+      rentalSpaceMinMax[0],
+      rentalSpaceMinMax[1]
     );
 
     const filteredByrentalPrice = filterByRange(
-      filteredBySpace,
+      filteredByrentalSpace,
       "rentalgross",
       rentalPriceMinMax[0],
       rentalPriceMinMax[1]
@@ -212,18 +242,26 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const value = {
     rentalApartments,
     setRentalApartments,
+    sellingApartments,
+    setSellingApartments,
+    targetApartments,
+    setTargetApartments,
     hoveredApartment,
     setHoveredApartment,
     getMinMax,
     visu,
     setVisu,
-    space,
-    setSpace,
+    rentalSpace,
+    setRentalSpace,
     rentalPrice,
     setRentalPrice,
+    sellingSpace,
+    setSellingSpace,
+    sellingPrice,
+    setSellingPrice,
     filter,
     setFilter,
-    filterTargetrentalApartments,
+    filterTargetApartments,
     handleLikedRentalApartments,
     isLikedApartment,
     activateLikedrentalApartments,

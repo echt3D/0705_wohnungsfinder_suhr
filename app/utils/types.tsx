@@ -73,7 +73,7 @@ export interface Apartment {
   additional_costs_1: number | null;
   additional_costs_2: number | null;
   incidental_costs_squaremeter: number;
-  parking_space_cost: number | null;
+  parking_rentalSpace_cost: number | null;
   target_group: string | null;
   min_occupancy: number;
   min_adult: number;
@@ -156,8 +156,8 @@ export interface SellingApartment {
   share_certificate: string | null;
   land_share: string | null;
   building_lease_interest: string | null;
-  package_parking_spaces: string[] | null;
-  package_parking_spaces_num: number;
+  package_parking_rentalSpaces: string[] | null;
+  package_parking_rentalSpaces_num: number;
 }
 
 export interface FilterType {

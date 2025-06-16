@@ -17,7 +17,7 @@ const ApartmentDetail = () => {
     data,
     move_in_date,
     properties,
-    space,
+    rentalSpace,
     rooms,
     apply,
     virtual_tour,
@@ -96,7 +96,7 @@ const ApartmentDetail = () => {
                 />
                 <div className="flex flex-col items-center">
                   <p>{clickedApartment.area} m²</p>
-                  <p>{space}</p>
+                  <p>{rentalSpace}</p>
                 </div>
               </div>
               <div className="flex flex-col items-center gap-2">

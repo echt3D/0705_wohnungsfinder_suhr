@@ -14,14 +14,14 @@ type FilterProps = {
 const Filter = ({ setOpenFilter }: FilterProps) => {
   const {
     rentalApartments,
-    space,
-    setSpace,
+    rentalSpace,
+    setRentalSpace,
     getMinMax,
     rentalPrice,
     setRentalPrice,
     filter,
     setFilter,
-    filterTargetrentalApartments,
+    filterTargetApartments,
     activateLikedrentalApartments,
     setActivateLikedrentalApartments,
     isDescendent,
@@ -41,8 +41,8 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
     other_filtering,
   } = t.filter;
 
-  const spaceMinMax = getMinMax("area");
-  const rentalPriceMinMax = getMinMax("rentalgross");
+  const rentalSpaceMinMax = getMinMax(rentalApartments, "area");
+  const rentalPriceMinMax = getMinMax(rentalApartments, "rentalgross");
 
   const createCheckboxes = (keyName: string): string[] => {
     const checkboxArr: string[] = [];
@@ -106,13 +106,13 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
         <section className="flex flex-col gap-4">
           <Slider
             label="Fläche (m²)"
-            value={space}
-            minValue={spaceMinMax[0]}
-            maxValue={spaceMinMax[1]}
+            value={rentalSpace}
+            minValue={rentalSpaceMinMax[0]}
+            maxValue={rentalSpaceMinMax[1]}
             size="md"
             step={1}
             hideThumb={false}
-            onChange={setSpace}
+            onChange={setRentalSpace}
           />
           <Slider
             label="Bruttomiete (CHF)"
@@ -194,7 +194,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
             className="bg-primary text-white px-2 py-4 font-medium hover:opacity-80 duration-200 cursor-pointer"
             onClick={() => setOpenFilter(false)}
           >{`${show_results} (${
-            filterTargetrentalApartments(rentalApartments).length
+            filterTargetApartments(rentalApartments).length
           })`}</button>
         </section>
       </div>

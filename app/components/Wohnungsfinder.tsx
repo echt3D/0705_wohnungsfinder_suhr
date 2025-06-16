@@ -33,7 +33,7 @@ const Wohnungsfinder = () => {
     showSVG,
     clickedApartment,
     setClickedApartment,
-    filterTargetrentalApartments,
+    filterTargetApartments,
   } = useContext(ApartmentContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
@@ -71,7 +71,7 @@ const Wohnungsfinder = () => {
       svgData[visu?.toString() as keyof typeof svgData]
     );
 
-    const filteredApartmentIds = filterTargetrentalApartments(
+    const filteredApartmentIds = filterTargetApartments(
       rentalApartments
     ).map((apartment) => apartment.title);
 

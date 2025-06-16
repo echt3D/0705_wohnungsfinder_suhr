@@ -1,10 +1,14 @@
-import { Apartment } from "../utils/types";
+import { Apartment, SellingApartment } from "../utils/types";
 import StatusBatch from "./StatusBatch";
 import LikeButton from "./LikeButton";
 import { ApartmentContext } from "../utils/createContext";
 import { useContext } from "react";
 
-const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
+const ApartmentCard = ({
+  apartment,
+}: {
+  apartment: Apartment | SellingApartment;
+}) => {
   const { setClickedApartment } = useContext(ApartmentContext);
   return (
     <>
@@ -18,7 +22,7 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
         <div className="flex items-center gap-2">
           <StatusBatch status={apartment.object_state_text} />
           <div className="rounded-md  text-sm px-2 py-1 border-line border">{`${
-            apartment.rentalgross ? "zum Mieten" : "zum Kaufen"
+            "rentalgross" in apartment ? "zum Mieten" : "zum Kaufen"
           }`}</div>
         </div>
         <div className="flex gap-2 text-sm">
@@ -27,12 +31,20 @@ const ApartmentCard = ({ apartment }: { apartment: Apartment }) => {
           <span>{apartment.floor}</span>
         </div>
         <p>{`${apartment.rooms}-Zimmer Wohnung`}</p>
-        <p className="text-md">{`Miete 
+        <p className="text-md">{`${
+          "rentalgross" in apartment
+            ? `Miete 
         ${new Intl.NumberFormat("de-CH", {
           style: "currency",
           currency: "CHF",
           maximumSignificantDigits: 3,
-        }).format(apartment.rentalgross)} p.M.`}</p>
+        }).format(apartment.rentalgross)} p.M.`
+            : `Verkaufspreis ${new Intl.NumberFormat("de-CH", {
+                style: "currency",
+                currency: "CHF",
+                maximumSignificantDigits: 3,
+              }).format(apartment.selling_price)}`
+        }`}</p>
       </div>
     </>
   );
