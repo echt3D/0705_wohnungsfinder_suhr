@@ -61,7 +61,7 @@ const Wohnungsfinder = () => {
   }, []);
   const currentImage = preloadedVisus[`/images/${visu}.jpg`];
   const stageRef = useRef(null);
-  const bounds = { width: 2636, height: 1974 };
+  const bounds = { width: 2000, height: 1498 };
   const heightScale = containerSize.height / bounds.height;
   const widthScale = containerSize.width / bounds.width;
   const scaleRatio = Math.max(heightScale, widthScale);

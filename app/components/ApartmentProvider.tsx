@@ -30,17 +30,26 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [showSVG, setShowSVG] = useState<boolean>(true);
 
   const getAllApartments = async () => {
-    const res = await fetch("/api/get-all-apartments");
-    const data = await res.json();
-    const sortedData = [...data.data].sort(
-      (apartmentA, apartmentB) => apartmentA.id - apartmentB.id
+    const res = await fetch(
+      "http://altemuehleevm.api.melon.market/api/v2/objects/"
     );
-    setApartments(sortedData);
+    const data = await res.json();
+    const resTwo = await fetch(
+      "http://altemuehle.api.melon.sale/api/v2/objects/"
+    );
+    const dataTwo = await resTwo.json();
+    // const sortedData = [...data.data].sort(
+    //   (apartmentA, apartmentB) => apartmentA.id - apartmentB.id
+    // );
+
+    setApartments([...data, ...dataTwo]);
   };
 
   useEffect(() => {
     getAllApartments();
   }, []);
+
+  console.log("apartments", apartments);
 
   useEffect(() => {
     if (apartments && apartments.length > 0) {
@@ -130,7 +139,6 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     });
     return filteredApartments;
   };
-
 
   const sortApartmentsByCategory = (apartments: Apartment[]) => {
     if (!sort) return apartments;
