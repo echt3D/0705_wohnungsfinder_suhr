@@ -26,6 +26,7 @@ const preloadImage = (src: string) => {
 
 const Wohnungsfinder = () => {
   const {
+    targetApartments,
     rentalApartments,
     hoveredApartment,
     setHoveredApartment,
@@ -71,9 +72,9 @@ const Wohnungsfinder = () => {
       svgData[visu?.toString() as keyof typeof svgData]
     );
 
-    const filteredApartmentIds = filterTargetApartments(
-      rentalApartments
-    ).map((apartment) => apartment.title);
+    const filteredApartmentIds = targetApartments.map(
+      (apartment) => apartment.title
+    );
 
     const filteredrentalApartments = rentalApartmentsVG.filter((aptSVG) => {
       const [apartmentId] = aptSVG;
@@ -86,8 +87,8 @@ const Wohnungsfinder = () => {
   const strToNum = (points: string[]) => points.map((point) => Number(point));
 
   const findApartmentByTitle = (apartmentTitle: string | null) =>
-    (rentalApartments &&
-      rentalApartments.find(
+    (targetApartments &&
+      targetApartments.find(
         (apartment) => apartment.title === apartmentTitle
       )) ||
     null;

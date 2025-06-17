@@ -16,7 +16,7 @@ const FilterButton = ({ openFilter, setOpenFilter }: FilterButtonProps) => {
     <section
       onClick={() => {
         setOpenFilter(!openFilter);
-        setTargetApartments(rentalApartments);
+        // setTargetApartments(rentalApartments);
       }}
       className={`w-fit md:w-1/4 xl:w-full shadow-xl border bg-secondary rounded-lg flex justify-between items-center cursor-pointer p-4 text-text_primary h-filter_button_desktop
       }`}
