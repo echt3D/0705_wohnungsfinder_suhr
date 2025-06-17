@@ -42,24 +42,14 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [showSVG, setShowSVG] = useState<boolean>(true);
 
   const getAllRentalApartments = async () => {
-    const res = await fetch(
-      "http://altemuehleevm.api.melon.market/api/v2/objects/"
-    );
+    const res = await fetch("/api/get-all-rental-apartments");
     const data = await res.json();
-
-    // const sortedData = [...data.data].sort(
-    //   (apartmentA, apartmentB) => apartmentA.id - apartmentB.id
-    // );
     setRentalApartments(data);
   };
 
   const getAllSellingApartments = async () => {
-    const res = await fetch("http://altemuehle.api.melon.sale/api/v2/objects/");
+    const res = await fetch("/api/get-all-selling-apartments");
     const data = await res.json();
-
-    // const sortedData = [...data.data].sort(
-    //   (apartmentA, apartmentB) => apartmentA.id - apartmentB.id
-    // );
     setSellingApartments(data);
   };
 
