@@ -44,12 +44,18 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const getAllRentalApartments = async () => {
     const res = await fetch("/api/get-all-rental-apartments");
     const data = await res.json();
+
+    // console.log("rental apartments count", data);
+
     setRentalApartments(data);
   };
 
   const getAllSellingApartments = async () => {
     const res = await fetch("/api/get-all-selling-apartments");
     const data = await res.json();
+
+    console.log("selling apartments", data);
+
     setSellingApartments(data);
   };
 

@@ -5,6 +5,7 @@ import {
   useState,
   useLayoutEffect,
   useContext,
+  useMemo,
 } from "react";
 import { Stage, Layer, Group, Line, Image as KonvaImage } from "react-konva";
 import svgData from "../data/svgData.json";
@@ -27,14 +28,14 @@ const preloadImage = (src: string) => {
 const Wohnungsfinder = () => {
   const {
     targetApartments,
-    rentalApartments,
+    // rentalApartments,
     hoveredApartment,
     setHoveredApartment,
     visu,
     showSVG,
     clickedApartment,
     setClickedApartment,
-    filterTargetApartments,
+    // filterTargetApartments,
   } = useContext(ApartmentContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
@@ -67,22 +68,20 @@ const Wohnungsfinder = () => {
   const widthScale = containerSize.width / bounds.width;
   const scaleRatio = Math.max(heightScale, widthScale);
 
-  const svgPathsArr = () => {
-    const rentalApartmentsVG = Object.entries(
-      svgData[visu?.toString() as keyof typeof svgData]
+  const svgPathsArr = useMemo((): [string, string][] => {
+    const svgShapes = svgData[visu.toString() as keyof typeof svgData];
+    if (!svgShapes || targetApartments.length === 0) return [];
+
+    const apartmentTitles = targetApartments.map((apt) => apt.title.trim());
+    console.log("targetAparments", targetApartments);
+
+    return Object.entries(svgShapes).filter(
+      ([id, points]: [string, string]) =>
+        apartmentTitles.includes(id.trim()) && points?.trim().length > 0
     );
+  }, [visu, targetApartments]);
 
-    const filteredApartmentIds = targetApartments.map(
-      (apartment) => apartment.title
-    );
-
-    const filteredrentalApartments = rentalApartmentsVG.filter((aptSVG) => {
-      const [apartmentId] = aptSVG;
-      return filteredApartmentIds.includes(apartmentId);
-    });
-
-    return filteredrentalApartments;
-  };
+  console.log("svgPathsArr", svgPathsArr);
 
   const strToNum = (points: string[]) => points.map((point) => Number(point));
 
@@ -152,7 +151,7 @@ const Wohnungsfinder = () => {
             />
           )}
           <Group className="relative"></Group>
-          {svgPathsArr().map((point, i) => (
+          {svgPathsArr.map((point, i) => (
             <Group
               key={i}
               onMouseEnter={(e) => {
