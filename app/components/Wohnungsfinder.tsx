@@ -68,20 +68,19 @@ const Wohnungsfinder = () => {
   const widthScale = containerSize.width / bounds.width;
   const scaleRatio = Math.max(heightScale, widthScale);
 
+  console.log("current image", currentImage);
+
   const svgPathsArr = useMemo((): [string, string][] => {
     const svgShapes = svgData[visu.toString() as keyof typeof svgData];
     if (!svgShapes || targetApartments.length === 0) return [];
 
     const apartmentTitles = targetApartments.map((apt) => apt.title.trim());
-    console.log("targetAparments", targetApartments);
 
     return Object.entries(svgShapes).filter(
       ([id, points]: [string, string]) =>
         apartmentTitles.includes(id.trim()) && points?.trim().length > 0
     );
   }, [visu, targetApartments]);
-
-  console.log("svgPathsArr", svgPathsArr);
 
   const strToNum = (points: string[]) => points.map((point) => Number(point));
 
