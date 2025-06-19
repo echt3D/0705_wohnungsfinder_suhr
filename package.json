@@ -17,6 +17,7 @@
     "@heroui/react": "^2.8.0-beta.7",
     "@heroui/select": "^2.4.19",
     "@heroui/slider": "^2.4.8",
+    "@heroui/system": "^2.4.17",
     "@nivo/core": "^0.93.0",
     "@nivo/line": "^0.93.0",
     "@prisma/client": "^6.4.1",
