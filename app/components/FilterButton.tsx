@@ -1,6 +1,6 @@
 import t from "../data/text.json";
-import { ApartmentContext } from "../utils/createContext";
-import { useContext } from "react";
+// import { ApartmentContext } from "../utils/createContext";
+// import { useContext } from "react";
 
 interface FilterButtonProps {
   openFilter: boolean;
@@ -9,8 +9,8 @@ interface FilterButtonProps {
 
 const FilterButton = ({ openFilter, setOpenFilter }: FilterButtonProps) => {
   const { sort_filter } = t.filter;
-  const { rentalApartments, setTargetApartments } =
-    useContext(ApartmentContext);
+  // const { rentalApartments, setTargetApartments } =
+  //   useContext(ApartmentContext);
 
   return (
     <section
