@@ -2,6 +2,7 @@
 import { ApartmentContext } from "../utils/createContext";
 import { useState, useEffect, useCallback } from "react";
 import { Apartment, SellingApartment, FilterType } from "../utils/types";
+import { bestPerspective } from "../data/bestPerspective";
 
 const initFilter = {
   floor: [],
@@ -15,11 +16,6 @@ const initFilter = {
 //   "1002": ["A.1.5"],
 //   "1009": ["A.0.2"],
 // };
-
-const bestPerspective = {
-  "A.0.2": 1002,
-  "A.1.5": 1004
-};
 
 const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [rentalApartments, setRentalApartments] = useState<Apartment[] | []>(
@@ -58,11 +54,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     if (clickedApartment) {
       const targetVisu =
         bestPerspective[clickedApartment.title as keyof typeof bestPerspective];
-      const step =
-        visu <
-        bestPerspective[clickedApartment.title as keyof typeof bestPerspective]
-          ? 1
-          : -1;
+      const step = visu < targetVisu ? 1 : -1;
 
       const interval = setInterval(() => {
         setVisu((prev) => {
@@ -76,7 +68,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
           }
           return next;
         });
-      }, 300); // 1 second per image
+      }, 300);
     }
     // if (clickedApartment) {
     //   const isVisible = visibleList[visu].find(
