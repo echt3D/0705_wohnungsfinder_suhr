@@ -6,10 +6,8 @@ interface ApartmentContext {
   setRentalApartments: (rentalApartments: Apartment[] | []) => void;
   sellingApartments: SellingApartment[] | [];
   setSellingApartments: (sellingApartments: SellingApartment[] | []) => void;
-  targetApartments: (Apartment | SellingApartment)[];
-  setTargetApartments: (
-    targetApartments: (Apartment | SellingApartment)[]
-  ) => void;
+  activeApartments: string;
+  setActiveApartments: (ctiveApartments: string) => void;
   hoveredApartment: Apartment | SellingApartment | null;
   setHoveredApartment: (
     hoveredApartment: Apartment | SellingApartment | null
@@ -30,7 +28,9 @@ interface ApartmentContext {
   setSellingPrice: (sellingPrice: number[] | number) => void;
   filter: FilterType;
   setFilter: (filter: FilterType) => void;
-  filterTargetApartments: (rentalApartments: Apartment[]) => Apartment[];
+  filterTargetApartments: (
+    targetApartments: (Apartment | SellingApartment)[]
+  ) => (Apartment | SellingApartment)[];
   handleLikedRentalApartments: (apartment: string) => void;
   isLikedApartment: (apartment: string) => boolean;
   activateLikedrentalApartments: boolean;
@@ -54,8 +54,8 @@ export const ApartmentContext = createContext<ApartmentContext>({
   setRentalApartments: () => {},
   sellingApartments: [],
   setSellingApartments: () => {},
-  targetApartments: [],
-  setTargetApartments: () => {},
+  activeApartments: "",
+  setActiveApartments: () => {},
   hoveredApartment: null,
   setHoveredApartment: () => {},
   getMinMax: () => [0, 0],

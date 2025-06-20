@@ -5,25 +5,38 @@ import ApartmentCard from "./ApartmentCard";
 import Filter from "./Filter";
 import { ApartmentContext } from "../utils/createContext";
 import ApartmentDetail from "./ApartmentDetail";
+// import { RadioGroup, Radio } from "@heroui/react";
 
 const Sidebar = () => {
   const [openFilter, setOpenFilter] = useState<boolean>(false);
   const {
-    // rentalApartments,
-    // filterTargetApartments,
+    rentalApartments,
+    sellingApartments,
+    filterTargetApartments,
     clickedApartment,
     setHoveredApartment,
-    targetApartments,
+    activeApartments,
   } = useContext(ApartmentContext);
   return (
     <aside className="absolute bottom-0 xl:relative w-full xl:w-sidebar_desktop z-30 xl:h-full gap-8 px-6 py-2 bg-transparent xl:bg-secondary">
+      {/* <RadioGroup label={""} value={sort} onValueChange={setSort}>
+        <Radio
+          key={i}
+          value={method.value}
+          onChange={() => setSort(method.value)}
+        >
+          Mieten
+        </Radio>
+      </RadioGroup> */}
       <FilterButton openFilter={openFilter} setOpenFilter={setOpenFilter} />
       {openFilter && <Filter setOpenFilter={setOpenFilter} />}
       {clickedApartment && <ApartmentDetail />}
 
       <div className="overflow-scroll xl:h-filter_desktop">
         <ul className="flex flex-row xl:flex-col gap-8 py-2 w-[120vw] xl:w-full">
-          {targetApartments.map((apartment, i) => (
+          {filterTargetApartments(
+            activeApartments === "mieten" ? rentalApartments : sellingApartments
+          ).map((apartment, i) => (
             <li
               key={i}
               className="px-2 py-4 shadow-md border rounded-lg bg-white hover:shadow-lg cursor-pointer relative min-w-[240px] grow "

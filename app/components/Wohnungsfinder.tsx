@@ -27,8 +27,9 @@ const preloadImage = (src: string) => {
 
 const Wohnungsfinder = () => {
   const {
-    targetApartments,
-    // rentalApartments,
+    activeApartments,
+    rentalApartments,
+    sellingApartments,
     hoveredApartment,
     setHoveredApartment,
     visu,
@@ -70,23 +71,30 @@ const Wohnungsfinder = () => {
 
   const svgPathsArr = useMemo((): [string, string][] => {
     const svgShapes = svgData[visu.toString() as keyof typeof svgData];
-    if (!svgShapes || targetApartments.length === 0) return [];
 
-    const apartmentTitles = targetApartments.map((apt) => apt.title.trim());
+    const activeList =
+      activeApartments === "mieten" ? rentalApartments : sellingApartments;
+
+    if (!svgShapes || !Array.isArray(activeList) || activeList.length === 0) {
+      return [];
+    }
+
+    const apartmentTitles = activeList.map((apt) => apt.title.trim());
 
     return Object.entries(svgShapes).filter(
-      ([id, points]: [string, string]) =>
-        apartmentTitles.includes(id.trim()) && points?.trim().length > 0
+      ([title, points]: [string, string]) =>
+        apartmentTitles.includes(title.trim()) && points?.trim().length > 0
     );
-  }, [visu, targetApartments]);
+  }, [visu, activeApartments, rentalApartments, sellingApartments, svgData]);
 
   const strToNum = (points: string[]) => points.map((point) => Number(point));
 
   const findApartmentByTitle = (apartmentTitle: string | null) =>
-    (targetApartments &&
-      targetApartments.find(
-        (apartment) => apartment.title === apartmentTitle
-      )) ||
+    (rentalApartments &&
+      (activeApartments === "mieten"
+        ? rentalApartments
+        : sellingApartments
+      ).find((apartment) => apartment.title === apartmentTitle)) ||
     null;
 
   const handleHover = (apartmentTitle: string | null) => {
@@ -96,6 +104,8 @@ const Wohnungsfinder = () => {
       console.log({ visu, foundApartment });
     }
   };
+
+  console.log({ svgPathsArr });
 
   const isHovered = (apartmentTitle: string | null) =>
     apartmentTitle === hoveredApartment?.title;

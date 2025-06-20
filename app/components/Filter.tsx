@@ -15,7 +15,7 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
   const {
     rentalApartments,
     sellingApartments,
-    targetApartments,
+    activeApartments,
     rentalSpace,
     setRentalSpace,
     sellingSpace,
@@ -56,7 +56,9 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
   ): string[] => {
     const checkboxArr: string[] = [];
 
-    for (const apartment of targetApartments) {
+    for (const apartment of activeApartments === "mieten"
+      ? rentalApartments
+      : sellingApartments) {
       if (apartment.hasOwnProperty(keyName)) {
         const value = String(apartment[keyName]);
         if (!checkboxArr.includes(value)) {
@@ -84,7 +86,9 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
   const isChecked = (name: string, value: string) =>
     (filter[name as keyof FilterType] as string[]).includes(value);
 
-  const isRental = (): boolean => "rentalgross" in targetApartments[0];
+  const isRental = (): boolean =>
+    "rentalgross" in
+    (activeApartments === "mieten" ? rentalApartments : sellingApartments)[0];
 
   return (
     <div className="w-full xl:h-filter_desktop  fixed bottom-0  xl:absolute  xl:top-filter_top_desktop px-6 pt-2 left-0 z-20 bg-secondary">
@@ -206,7 +210,11 @@ const Filter = ({ setOpenFilter }: FilterProps) => {
           <button
             className="bg-primary text-white px-2 py-4 font-medium hover:opacity-80 duration-200 cursor-pointer"
             onClick={() => setOpenFilter(false)}
-          >{`${show_results} (${targetApartments.length})`}</button>
+          >{`${show_results} (${
+            activeApartments === "mieten"
+              ? rentalApartments.length
+              : sellingApartments.length
+          })`}</button>
         </section>
       </div>
     </div>
