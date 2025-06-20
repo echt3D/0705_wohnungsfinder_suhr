@@ -20,7 +20,6 @@ const ApartmentDetail = () => {
     rentalSpace,
     rooms,
     apply,
-    virtual_tour,
   } = t.details;
 
   return (
@@ -61,15 +60,6 @@ const ApartmentDetail = () => {
                 className="w-full border-primary border-2 block text-center p-2 rounded-full text-primary hover:text-white hover:bg-primary duration-200"
               >
                 {open_floorplan}
-              </a>
-            )}
-            {clickedApartment.virtual_tour_link && (
-              <a
-                href={clickedApartment.virtual_tour_link}
-                target="_blank"
-                className="w-full border-primary border-2 block text-center p-2 rounded-full text-primary hover:text-white hover:bg-primary duration-200"
-              >
-                {virtual_tour}
               </a>
             )}
           </div>
@@ -126,7 +116,7 @@ const ApartmentDetail = () => {
           <Link
             href={clickedApartment.application_form}
             target="_blank"
-            className={`mt-auto w-full bg-primary text-white p-2 text-center rounded-xl duration-200 ${
+            className={`mt-auto w-full bg-primary text-white p-2 text-center rounded-full duration-200 ${
               clickedApartment.object_state_text === "Frei"
                 ? "hover:opacity-70 pointer-events-auto"
                 : "opacity-70 pointer-events-none"

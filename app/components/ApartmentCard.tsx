@@ -9,7 +9,7 @@ const ApartmentCard = ({
 }: {
   apartment: Apartment | SellingApartment;
 }) => {
-  const { setClickedApartment } = useContext(ApartmentContext);
+  const { setClickedApartment,  } = useContext(ApartmentContext);
   return (
     <>
       <div className="absolute right-2 z-10">
@@ -17,7 +17,9 @@ const ApartmentCard = ({
       </div>
       <div
         className="flex flex-col gap-2"
-        onClick={() => setClickedApartment(apartment)}
+        onClick={() => {
+          setClickedApartment(apartment);
+        }}
       >
         <div className="flex items-center gap-2">
           <StatusBatch status={apartment.object_state_text} />

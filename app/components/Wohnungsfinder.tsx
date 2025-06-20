@@ -68,8 +68,6 @@ const Wohnungsfinder = () => {
   const widthScale = containerSize.width / bounds.width;
   const scaleRatio = Math.max(heightScale, widthScale);
 
-  console.log("current image", currentImage);
-
   const svgPathsArr = useMemo((): [string, string][] => {
     const svgShapes = svgData[visu.toString() as keyof typeof svgData];
     if (!svgShapes || targetApartments.length === 0) return [];
@@ -94,6 +92,9 @@ const Wohnungsfinder = () => {
   const handleHover = (apartmentTitle: string | null) => {
     const foundApartment = findApartmentByTitle(apartmentTitle);
     setHoveredApartment(foundApartment);
+    if (foundApartment) {
+      console.log({ visu, foundApartment });
+    }
   };
 
   const isHovered = (apartmentTitle: string | null) =>

@@ -10,6 +10,17 @@ const initFilter = {
   liked: [],
 };
 
+// const visibleList: Record<string, string[]> = {
+//   "1001": ["A.0.2"],
+//   "1002": ["A.1.5"],
+//   "1009": ["A.0.2"],
+// };
+
+const bestPerspective = {
+  "A.0.2": 1002,
+  "A.1.5": 1004
+};
+
 const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [rentalApartments, setRentalApartments] = useState<Apartment[] | []>(
     []
@@ -23,7 +34,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [hoveredApartment, setHoveredApartment] = useState<
     Apartment | SellingApartment | null
   >(null);
-  const [visu, setVisu] = useState<number>(1002);
+  const [visu, setVisu] = useState<number>(1009);
   const [rentalSpace, setRentalSpace] = useState<number[] | number>([0, 0]);
   const [rentalPrice, setRentalPrice] = useState<number[] | number>([0, 0]);
   const [sellingSpace, setSellingSpace] = useState<number[] | number>([0, 0]);
@@ -41,11 +52,60 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   >(null);
   const [showSVG, setShowSVG] = useState<boolean>(true);
 
+  const handleClickedApartment = (
+    clickedApartment: Apartment | SellingApartment | null
+  ) => {
+    if (clickedApartment) {
+      const targetVisu =
+        bestPerspective[clickedApartment.title as keyof typeof bestPerspective];
+      const step =
+        visu <
+        bestPerspective[clickedApartment.title as keyof typeof bestPerspective]
+          ? 1
+          : -1;
+
+      const interval = setInterval(() => {
+        setVisu((prev) => {
+          const next = prev + step;
+          if (
+            (step > 0 && next >= targetVisu) ||
+            (step < 0 && next <= targetVisu)
+          ) {
+            clearInterval(interval);
+            return targetVisu;
+          }
+          return next;
+        });
+      }, 300); // 1 second per image
+    }
+    // if (clickedApartment) {
+    //   const isVisible = visibleList[visu].find(
+    //     (activeReference) =>
+    //       activeReference === clickedApartment.reference_number
+    //   );
+
+    //   if (!isVisible) {
+    //     const toSetVisibleKey = Object.keys(visibleList).find(
+    //       (visibleKey: keyof typeof visibleList) => {
+    //         const activeVisuList = visibleList[visibleKey];
+    //         const isVisible = activeVisuList.find(
+    //           (activeReference) =>
+    //             activeReference === clickedApartment.reference_number
+    //         );
+    //         return !!isVisible;
+    //       }
+    //     );
+
+    //     setVisu(Number(toSetVisibleKey));
+    //   }
+    // }
+
+    setClickedApartment(clickedApartment);
+  };
+
   const getAllRentalApartments = async () => {
     const res = await fetch("/api/get-all-rental-apartments");
     const data = await res.json();
-
-    // console.log("rental apartments count", data);
 
     setRentalApartments(data);
   };
@@ -53,8 +113,6 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
   const getAllSellingApartments = async () => {
     const res = await fetch("/api/get-all-selling-apartments");
     const data = await res.json();
-
-    console.log("selling apartments", data);
 
     setSellingApartments(data);
   };
@@ -267,7 +325,7 @@ const ApartmentProvider = ({ children }: { children: React.ReactNode }) => {
     sort,
     setSort,
     clickedApartment,
-    setClickedApartment,
+    setClickedApartment: handleClickedApartment,
     showSVG,
     setShowSVG,
     getAllRentalApartments,
